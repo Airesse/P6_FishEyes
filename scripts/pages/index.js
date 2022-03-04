@@ -1,45 +1,33 @@
-    async function getPhotographers() {
-        // Penser à remplacer par les données récupérées dans le json
-        const photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
-        // et bien retourner le tableau photographers seulement une fois
-        return ({
-            photographers: [...photographers, ...photographers, ...photographers]})
-    }
+////// HOME PAGE
+  
+import {API} from "../api/get.js";
+import {homepagePhotographerCard, profilpagePhotographerCard, profilpageMediaPhotoCard,
+  profilpageMediaVideoCard, profilpageMediaCard} from "../models/templatesHTML.js";
+import {onePhotographer, oneMedia,} from "../models/constructors.js"
+import {allDatas} from "../models/factories.js";
 
-    async function displayData(photographers) {
-        const photographersSection = document.querySelector(".photographer_section");
 
-        photographers.forEach((photographer) => {
-            const photographerModel = photographerFactory(photographer);
-            const userCardDOM = photographerModel.getUserCardDOM();
-            photographersSection.appendChild(userCardDOM);
-        });
-    };
+//DOM elements
 
-    async function init() {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
-    };
-    
-    init();
-    
+const photographerSection = document.querySelector(".photographer_section") //home page
+
+
+//Functions
+//----Asynchrone initialisation (wait to get all datas before displays them)
+let init = async() => {
+    console.log ("init ok");
+
+    let api = new API;
+    let datasAllPhotographers = await api.getDataAllPhotographers();
+    console.log (dataAllPhotographers);
+
+    let homepage = new allDatas;
+    let homepageHtml = homepage.displayHomepageDataPhotographers //await ?
+    photographerSection.innerHTML = homepageHtml;
+
+}
+
+//Events
+// ----when DOM content load
+document.addEventListener("DOMContentLoad", init);
+
