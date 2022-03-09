@@ -3,22 +3,30 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+
+    article {
+        justify-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h2 {
+            color:$color-primary-light;
+            font-size: 36px;
+        }
+        
+        img {
+            height: 200px;
+            width: 200px;
+        }
+    }   
+
 }
 
-.photographerCard article {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+#photographerHeader {
+    background-color:$color-secondary-lightest;
+    height: 300px;
+    margin: 0 100px;/*à revoir*/
 }
 
-.photographerCard article h2 {
-    color:$color-primary-light;
-    font-size: 36px;
-}
-
-.photographerCard article img {
-    height: 200px;
-    width: 200px;
-}

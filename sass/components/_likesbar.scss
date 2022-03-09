@@ -1,0 +1,23 @@
+.boxLikes-bar {
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+    background:$color-primary-lightest;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    font-size: 24px;
+    border-radius: 5px 5px 0 0;
+    padding: 0 30px;
+
+    .likes-bar {
+      display: flex;
+      align-items: center;
+    }
+    
+    .likes-bar .totalLikes {
+      margin-right: 5px;
+    }
+}
+  

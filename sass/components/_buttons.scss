@@ -1,9 +1,9 @@
-
+/*PROFIL PAGE: photographer header - Button :"Contactez moi"*/
 .contact_button {
     font-size: 20px;
     font-weight: bold;
-    color: white;
-    padding: 11px;
+    color:$color-secondary-lightest;
+    padding: 10px;
     width: 170px;
     height: 70px;
     border: none;
@@ -23,3 +23,38 @@
     
 }
 
+/*PROFIL PAGE: ModalLightbox buttons */
+
+.lightbox__button-previous{
+    background: none;
+    border: none;
+
+    .fa-chevron-left{
+        order: 1;
+        font-size: 50px;
+        cursor: pointer;
+        color: $color-primary;
+    }
+}
+
+.lightbox__button-next{
+    background: none;
+    border: none;
+    position: absolute;/*à verifier*/
+    right: -70px;
+
+    .fa-chevron-right{
+        order: 3;
+        font-size: 50px;
+        cursor: pointer;
+        color: $color-primary;
+    }
+}
+
+.lightbox__button-close{
+    background: none;
+    border: none;
+    position: absolute;
+    top: 60px;
+    right: -80px;
+}

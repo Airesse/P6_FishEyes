@@ -1,38 +1,53 @@
 #contact_modal {
     display: none;
+    top: 0;
+    position: fixed;
+    /*background-color: rgba(0, 0, 0, 0.25);*/
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-}
+
 
 
 
 .modal {
+    position: relative;
     border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
+    background-color:$color-primary-lightest;
+    width: 35%;
+    height: 810px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    margin-top: 2.8%;
+
+
+    header {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    header img {
+        cursor: pointer;
+        position: absolute;
+        top: 50px;
+        right: 50px;
+    }
+
+    header h2 {
+        font-size: 62px;
+        font-weight: normal;
+        text-align: center;
+        margin-bottom: 8px;
+        
+    }
+
 }
 
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
+/*.contact_button : in _buttons.scss*/

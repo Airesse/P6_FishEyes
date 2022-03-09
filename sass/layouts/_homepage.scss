@@ -9,6 +9,11 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+
+    h1{
+        margin-right: 100px;
+        color:$color-primary;
+    }
 }
 
 .photographer_section {
@@ -27,7 +32,12 @@ header {
 
     article{
         @include element-center();
-        align-self: center;    
+        align-self: center;
+        
+        div{
+            @include element-center();
+            align-self: center; 
+        }
     }
 
     article p{
@@ -42,6 +52,7 @@ header {
             width: 200px;
             border-radius: 50%;
             object-fit: cover;
+            /*box-shadow: $color-secondary-light 3px 3px 3px;*//*a revoir*/
         }
     }
 
@@ -57,7 +68,7 @@ header {
     }
 
     &__price{
-        color: $color-secondary-ligth;
+        color:$color-secondary-light;
         font-weight: 500;
         font-size: 0.75em;
     }

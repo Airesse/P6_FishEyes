@@ -1,4 +1,4 @@
-//DOM elements
+/*//DOM elements
 let homepagePhotographerCardHTML;
 let profilpagePhotographerCardHTML;
 let profilpageMediaPhotoCardHTML;
@@ -93,7 +93,7 @@ export function profilpageMediaVideoCard() {
         </article>`;
 
     return profilpageMediaVideoCardHTML;
-}
+}*/
 
 
 

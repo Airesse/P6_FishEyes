@@ -4,6 +4,7 @@
   <head>
     
     <meta charset="utf-8">
+    <base href="/">
 
     <link rel="icon" type="image/png" href="assets/icons/fisheye_favicon.png"/>
     <!--Importation : CSS files-->
@@ -32,9 +33,7 @@
     </header>
 
     <main id="main">
-      <section  class="photographerCard" id="photographer-section">
-        
-        
+      <section  class="photographerCard" id="photographer-section">   
       </section>
       
       <section class="photographerMedia" id="widget-section">
@@ -51,9 +50,38 @@
           </select>
         </form>
         
-    </section>
+      </section>
+
+      <div class=boxLikes-bar>
+        <div class="likes-bar">
+          <p class="totalLikes"></p>
+          <div class="fas fa-heart"></div>
+        </div>
+        <div class="price-bar">
+          <p class="price"></p>
+        </div>
+      </div>
+
     </main>
 
+    <div class="modalLightbox" tabindex="1" aria-label="Vue complète de l'image">
+      <div class="lightbox">
+        <button class="lightbox__button-previous" tabindex="1" aria-label="Sélectionner l'image précédente">
+          <div class="fas fa-chevron-left"></div>
+        </button>
+        <div class="lightbox__media" tabindex="1">
+          <figure id="lightbox__media-figure" tabindex="1">
+            <figcaption id="lightbox__media-title" tabindex="1"></figcaption>
+          </figure>  
+        </div>
+        
+        <button class="lightbox__button-next" tabindex="1" aria-label="Sélectionner l'image suivante">
+          <div class="fas fa-chevron-right"></div>
+        </button>
+        <button class="lightbox__button-close" tabindex="1" aria-label="Fermer la fenêtre"></button>
+      </div>
+
+    </div>
 
     <div id="modalContact">
       <div class="modalContact-box">
@@ -69,14 +97,14 @@
               <input type="text" id="contact-lastName" minlength='2' maxlength="20"/>
               <label for="contact-email">Email</label>
               <input type="email" id="contact-email"/>
-              <label for="contact-message"minlength='2' maxlength="250">Votre message</label>
+              <label for="contact-message" minlength='2' maxlength="250">Votre message</label>
               <input type="text" id="contact-message"/>
             <button id="submit-form_button">Envoyer</button>
           </form>
 		  </div>
     </div>
 
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script defer type="module" src="./scripts/pages/photographer.js"></script>
     
   </body>
 </html>

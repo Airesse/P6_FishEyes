@@ -5,24 +5,37 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-}
 
-form label {
-    color: #312E2E;/*a reverifier*/
-    font-size: 36px;
-}
 
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
+    label {
+        color: #312E2E;/*a reverifier*/
+        font-size: 36px;
+    }
 
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+    div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: self-start;
+        margin-bottom: 26px;
+    }
+
+    input {
+        width: 100%;
+        height: 68px;
+        border: none;
+        border-radius: 5px;
+
+        &#contact-message{
+            border: none;
+            border-radius: 5px;
+            resize: none;
+            width:100%;
+            height: 170px;
+        }
+    }
+
+    button {
+        font-weight: 400;
+    }
 }
