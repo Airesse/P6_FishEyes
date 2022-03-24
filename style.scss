@@ -5,16 +5,18 @@
 /*@import "./sass/utils/_keyframes.scss";*/
 @import "./sass/utils/_variables.scss";
 @import "./sass/utils/_mixins.scss";
-
 @import "./sass/base/_base.scss";
 @import "./sass/components/_buttons.scss";
+@import "./sass/components/_close.scss";
 @import "./sass/components/_form.scss";
+@import "./sass/layouts/_modalContact.scss";
+@import "./sass/layouts/_modalLightbox.scss";
 /*@import "./sass/components/_lightbox.scss";*/
 @import "./sass/components/_likesbar.scss";
 @import "./sass/components/_widget.scss";
-@import "./sass/layouts/_homepage.scss";
-@import "./sass/layouts/_modalContact.scss";
-@import "./sass/layouts/_modalLightbox.scss";
-@import "./sass/layouts/_profilpage.scss";
+@import "./sass/pages/_homepage.scss";
+@import "./sass/pages/_profilpage.scss";
+
+
 /* @import page à rajouter si non vide*/
 

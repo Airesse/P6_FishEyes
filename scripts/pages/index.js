@@ -14,7 +14,7 @@ const photographerSection = document.querySelector(".photographer_section") //ho
 //Functions
 //----Asynchrone initialisation (wait to get all datas before displays them)
 let init = async() => {
-  console.log ("init ok");
+  //console.log ("init ok");
 
   //let api = new API;
   //let datasAllPhotographers = await api.getDataAllPhotographers();
@@ -22,9 +22,9 @@ let init = async() => {
 
   let homepage = new allDatas();
   let homepageHtml = await homepage.displayHomepageDataPhotographers()
-  console.log (homepageHtml)
+  //console.log (homepageHtml)
   photographerSection.innerHTML = homepageHtml;
-  console.info('DOM loaded');
+  //console.info('DOM loaded');
 
 }
 

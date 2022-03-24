@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     width: 300px;
-    font-size: 24px;
+    height: 50px;
     border-radius: 5px 5px 0 0;
     padding: 0 30px;
 
@@ -16,8 +16,10 @@
       align-items: center;
     }
     
-    .likes-bar .totalLikes {
+    .likes-bar .totalLikes, .price-bar p {
       margin-right: 5px;
+      font-size: 24px;
+      font-weight: bold;
     }
 }
   

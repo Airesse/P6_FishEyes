@@ -16,18 +16,18 @@ export class allDatas extends API {
     //----Display photographers Datas in Homepage
     async displayHomepageDataPhotographers () {
         let datasAllPhotographers = await this.getDataAllPhotographers()
-        console.log(datasAllPhotographers);
+        //console.log(datasAllPhotographers);
 
         //--------All Photographers Instanciation
         let instanciations = datasAllPhotographers.map (photographer => new onePhotographer(photographer))
-        console.log (instanciations);
+        //console.log (instanciations);
 
         //--------HomePage Composition = Photographers Infos + Homepage card's recuperation
         let homepageComposition = ""
         for(let item of instanciations){
     
             homepageComposition += item.homepagePhotographerCard();
-            console.log(homepageComposition);
+            //console.log(homepageComposition);
         }
 
         return homepageComposition;
@@ -39,26 +39,29 @@ export class allDatas extends API {
 
     //----Display one photographer Datas in profilpage
     async displayProfilpageDataPhotographer (id){
-
+        console.log ("idProfilpage=" +id)
 
         //------PHOTOGRAPHER header PART
-        let dataOnePhotographer = await this.getDataOnePhotographer(id)
-        console.log(dataOnePhotographer);
+        this.dataOnePhotographer = await this.getDataOnePhotographer(id)
+        console.log(this.dataOnePhotographer);
+        
 
         //---------- one Photographer Instanciation
-        let instanciation = dataOnePhotographer.map (photographer => new onePhotographer(photographer))
+        let instanciation = new onePhotographer(this.dataOnePhotographer)
         console.log (instanciation);
+
         //-----------ProfilPage photographer card = photographer Infos + photographercard's recuperation
         let photographerCardComposition = ""
-        for(let item of instanciation){
-           photographerCardComposition += item.profilpagePhotographerCard();
+        //for(let item of instanciation){
+           photographerCardComposition = instanciation.profilpagePhotographerCard();
            console.log(photographerCardComposition);
-        };
+          if (!photographerCardComposition) this.getRedirectURLbyId() //REVOIR + dans factory?
+        
 
-
-       //------MEDIA PART
-        let dataOneMedia = await this.getDataMedia(id)
-        console.log(dataOneMedia);
+        
+        //------MEDIA PART
+        this.dataOneMedia = await this.getDataMedia(id)
+        console.log(this.dataOneMedia);
         //---------- one Media (allmedia for one photographer) Instanciation
         let instanciationm = this.dataOneMedia.map (media => new oneMedia(media))
         console.log (instanciationm);
@@ -68,13 +71,25 @@ export class allDatas extends API {
        for(let item of instanciationm){
            mediaCardComposition += item.profilpageMediaCard();
            console.log (mediaCardComposition);
-       };
+       }
 
-       //--------ProfilPage Composition = photographer header card + mediacard
-       let profilpageComposition = photographerCardComposition + mediaCardComposition;
+       //---------ProfilPage likesbar = photographer numbers of likes + price
+ 
+       let likesbar= "";
+       const totalLikes = this.dataOneMedia.reduce((a, b) => +a + +b.likes, 0)
+       for(let item of instanciationm){
+        likesbar += item.profilpagePhotographerLikesBar(totalLikes);
+        console.log(likesbar);
+     };
 
 
-       return profilpageComposition; 
+       //--------ProfilPage Composition = photographer header card + mediacard + likes-bar
+       let profilpageComposition = photographerCardComposition + mediaCardComposition + likesbar;
+
+
+       return profilpageComposition;
+       
+       //return displayProfilpageDataPhotographer
        
     }
 

@@ -1,5 +1,8 @@
 /*@import url("photographer.css");*/
 
+
+
+
 form {
     display: flex;
     width: 100%;
@@ -35,7 +38,56 @@ form {
         }
     }
 
-    button {
+    /*button {
         font-weight: 400;
-    }
+        margin-top: 30px;
+    }*/
 }
+
+
+
+
+.text-control { /* text written by user*/
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 20px;
+    height: 48px;
+    outline:transparent solid 2px;
+  }
+  
+  /*------------Data error*/
+  
+  input[data-error]::after {
+      content: attr(data-error);
+      font-size: small;
+      color: #e54858;
+  } 
+  
+  .formData[data-error]::after {
+    content: attr(data-error);
+    font-size: small;
+    font-weight: 600;
+    color: #e54858;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 0.3;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+  }
+  
+  .formData:not([data-error])::after {
+    display: block;
+    content: "";
+  }
+  
+  .formData[data-error-visible="true"] .text-control {
+    outline: 2px solid #e54858;
+  }

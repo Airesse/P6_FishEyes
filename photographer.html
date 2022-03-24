@@ -4,18 +4,19 @@
   <head>
     
     <meta charset="utf-8">
-    <base href="/">
+    
 
     <link rel="icon" type="image/png" href="assets/icons/fisheye_favicon.png"/>
     <!--Importation : CSS files-->
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/normalize.css"/>
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./normalize.css"/>
     <!--Importation : DM Sans Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
      <!--Importation : icones-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a9c263524a.js" crossorigin="anonymous"></script>
     <!--importation icones à verifier script fontasome-->
 
     <title>Fisheye - photographe </title>
@@ -33,42 +34,40 @@
     </header>
 
     <main id="main">
-      <section  class="photographerCard" id="photographer-section">   
+      <section  class="photographerCard" id="photographer-section">  
       </section>
       
-      <section class="photographerMedia" id="widget-section">
-        
-        <form class="photographerMedia" id="widget-form">
-          <label class="photographerMedia" id="widget-label" for="widget-container">
-            <div>Trier par</div>
-          </label>
+      <aside class="photographerMedia" id="widget-aside">
 
-          <select id="widget-container" name="listbox-container">
-            <option>Popularité</option>
-            <option>Date</option>
-            <option>Titre</option>
-          </select>
-        </form>
+        <label class="widget-container" id="widget" for="widget-container">Trier par</label>
         
-      </section>
+        <div class="photographerMedia" id="widget-filter" tabindex="0" role="button">
+          <label class="widget-container" role="label">Popularité></label>
+          <ui class="widget-listbox" role="listbox" aria-labelledby="widget-label" style="display: none;" > <!--style="display: none;"-->
+              <li class="widget-listbox_option" role="option" id="widget-popularity" aria-selected="true" data-listbox-value="rate" data-listbox-name="Popularité">
+                Popularité</li>
+              <li class="widget-listbox_option" role="option" id="widget-date" data-listbox-value="date" data-listbox-name="Date">
+                Date</li> 
+              <li class="widget-listbox_option" role="option" id="widget-title" data-listbox-value="title" data-listbox-name="Titre">
+                Titre</li>
+          </ui>
+        </div>
+        
+      </aside>
 
-      <div class=boxLikes-bar>
-        <div class="likes-bar">
-          <p class="totalLikes"></p>
-          <div class="fas fa-heart"></div>
-        </div>
-        <div class="price-bar">
-          <p class="price"></p>
-        </div>
-      </div>
+      <section  class="photographerMedia" id="mediaCards">    
+      </section>  
 
     </main>
 
     <div class="modalLightbox" tabindex="1" aria-label="Vue complète de l'image">
+
       <div class="lightbox">
+
         <button class="lightbox__button-previous" tabindex="1" aria-label="Sélectionner l'image précédente">
           <div class="fas fa-chevron-left"></div>
         </button>
+
         <div class="lightbox__media" tabindex="1">
           <figure id="lightbox__media-figure" tabindex="1">
             <figcaption id="lightbox__media-title" tabindex="1"></figcaption>
@@ -78,7 +77,9 @@
         <button class="lightbox__button-next" tabindex="1" aria-label="Sélectionner l'image suivante">
           <div class="fas fa-chevron-right"></div>
         </button>
+
         <button class="lightbox__button-close" tabindex="1" aria-label="Fermer la fenêtre"></button>
+      
       </div>
 
     </div>
@@ -86,25 +87,38 @@
     <div id="modalContact">
       <div class="modalContact-box">
           <header>
-            <h2 id="contact_modal_title">Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" />
+            <h2 id="modalContact-title">Contactez-moi</h2>
+            <img src="assets/icons/close.svg" class="close" />
           </header>
 
-          <form id="contact-form">
+          <form id="modalContact-form">
+            <div class="formData" data-error="Le Prénom doit comporter entre 2 et 20 lettres.">  
               <label for="contact-firstName">Prénom</label>
-              <input type="text" minlength='2' maxlength="20" id="contact-firstName"/>
+              <input class="text-control" type="text" minlength='2' maxlength="20" id="contact-firstName"/>
+            </div>
+
+            <div class="formData" data-error="Le Nom doit comporter entre 2 et 20 lettres.">
               <label for="contact-lastName">Nom</label>
-              <input type="text" id="contact-lastName" minlength='2' maxlength="20"/>
+              <input class="text-control" type="text" id="contact-lastName" minlength='2' maxlength="20"/>
+            </div>
+
+            <div class="formData" data-error="L'adresse e-mail doit être valide."></div>  
               <label for="contact-email">Email</label>
-              <input type="email" id="contact-email"/>
-              <label for="contact-message" minlength='2' maxlength="250">Votre message</label>
-              <input type="text" id="contact-message"/>
-            <button id="submit-form_button">Envoyer</button>
+              <input class="text-control" type="email" id="contact-email"/>
+            </div>
+            
+            <div class="formData" data-error="Le message comporte maximum 250 caractères.">
+              <label for="contact-message" minlength="2" maxlength="250">Votre message</label>
+              <input class="text-control" type="text" id="contact-message"/>
+            </div>
+
+            <!--button >Envoyer</button-->
+            <input id="submit-form_button" class="btn-submit" type="submit" value="Envoyer">
           </form>
 		  </div>
     </div>
 
-    <script defer type="module" src="./scripts/pages/photographer.js"></script>
+    <script type="module" src="./scripts/pages/photographer.js"></script>
     
   </body>
 </html>

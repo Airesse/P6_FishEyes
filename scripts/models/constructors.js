@@ -41,22 +41,21 @@ export class onePhotographer{
 
     profilpagePhotographerCard() {
         let profilpagePhotographerCardHTML = `
+            <div id="photographerHeader">
+                <div class="photographerInfo" >
+                    <h2 class="photographerCard__name">${this.name}</h2>
+                    <h3 class="photographerCard__location">${this.country}</h3>
+                    <p class="photographerCard__sentence">${this.tagline}</p>
+                </div>
 
-            <div class="photographerCard" id="photographerHeader>
-                <h2 class="photographerCard__name">${this.name}</h2>
-                <p class="photographerCard__location">${this.country}</p>
-                <p class="photographerCard__sentence">${this.tagline}</p>
-            </div>
-
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-            
-            <div class="photographerCard">
-                <img class="photographerCard__image" src="./assets/photographers/${this.name.replace(' ','').replace('-','')}.jpg" alt="${this.name}"/>
+                <button class="contact_button">Contactez-moi</button>
+                
+                <div class="photographerCard">
+                    <img class="photographerCard__image" src="./assets/photographers/${this.name.replace(' ','').replace('-','')}.jpg" alt="${this.name}"/>
+                </div>
             </div>`;
-
         return profilpagePhotographerCardHTML;
     }
-
 
 }
 
@@ -66,14 +65,17 @@ export class oneMedia{
 
     constructor(data){
         this.id = data.id;
-        this.photographer = {id: data.photographerId};
+        this.photographerId = data.photographerId;
         this.title = data.title;
-        this.image = data.image; //à faire image en pleine écran  + à revoir besoin de id?
-        this.video = data.video; //à faire video en pleine écran `assets/photographers/${id}/mediaPhotogapher/${video}.mp4`;
+        this.type = 'media'//image or video 
+        this.image = data.image ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.image}` : null
+        this.video = data.video ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.video}` : null
+        this.fullImage = data.image ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.image}` : null
+        this.fullVideo = data.video ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.video}` : null //`assets/photographers/${id}/mediaPhotogapher/${video}.mp4`;
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
-        this.type = 'media'//image or video 
+      
         //this.portrait
     }
 
@@ -84,12 +86,15 @@ export class oneMedia{
         let profilpageMediaPhotoCardHTML = `
             <article class="mediaPhotoCard">
                 <div class="mediaPhotoCard__image">
-                    <img class="mediaPhotoCard__image" src="assets/photographers/${this.photographer}/mediaPhotographer/${this.image}" alt="${this.title}"/>
+                    <img class="mediaPhotoCard__image" src="${this.image}" alt="${this.title}"/>
                 </div>
 
                 <div class="mediaCard__info">
-                    <p class="mediaCard__title">${this.title}</h2>
-                    <button class="mediaCard__button">${this.likes}</button>
+                    <h3 class="mediaCard__title">${this.title}</h3>
+                    <span class="mediaCard__Likes>
+                        <h3 class="mediaCard__numberLikes">${this.likes}</h3>
+                        <i class="fas fa-heart full" aria-label="likes" ></i>
+                    </span>
                 </div>               
             </article>`;
             
@@ -107,13 +112,16 @@ export class oneMedia{
                 <div class="mediaVideoCard__video">
                     <div class="mediaVideoCard__video-overlay"></div>
                     <video class="mediaVideoCard__video-video">
-                        <source type="video/webm" src="assets/photographers/${this.photographer}/mediaPhotographer/${this.video}"/>
+                        <source type="video/webm" src="${this.video}"/>
                     </video>
                 </div>
                 
                 <div class="mediaCard__info">
-                    <p class="mediaCard__title">${this.title}</h2>
-                    <button class="mediaCard__button">${this.likes}</button>
+                    <h3 class="mediaCard__title">${this.title}</h3>
+                    <span class="mediaCard__Likes>
+                        <h3 class="mediaCard__numberLikes">${this.likes}</h3>
+                        <i class="fas fa-heart full" aria-label="likes" ></i>
+                    </span>
                 </div>               
             </article>`;
 
@@ -126,8 +134,26 @@ export class oneMedia{
 
     // ----PHOTOGRAPHER PAGE card media (= card media-Photo + card media-Video)
 
-    profilpageMediaCard() {
-        return this.video ? this.profilpageMediaPhotoCard() : this.profilpageMediaVideoCard();
+    //-------- Conditionnal operator : if condition=true, return videoCard else return photocard
+    profilpageMediaCard=() => {
+        return this.video ? this.profilpageMediaVideoCard() : this.profilpageMediaPhotoCard();
+    }
+
+    // ----PHOTOGRAPHER PAGE likes bar
+    profilpagePhotographerLikesBar(totalLikes){
+        let profilpagePhotographerLikesBarHTML = `
+        <div class=boxLikes-bar>
+            <div class="likes-bar">
+                <p class="totalLikes">${totalLikes}</p>
+                <div class="fas fa-heart full"></div>
+            </div>
+            <div class="price-bar">
+                <p class="price">${this.price}&euro; / jour</p>
+            </div>
+        </div>
+        `;
+
+        return profilpagePhotographerLikesBarHTML;
     }
 
 

@@ -1,5 +1,5 @@
-/*PROFIL PAGE: photographer header - Button :"Contactez moi"*/
-.contact_button {
+/*PROFIL PAGE: photographer header - Buttons :"Contactez moi" et "Envoyer"*/
+.contact_button, #submit-form_button {
     font-size: 20px;
     font-weight: bold;
     color:$color-secondary-lightest;
@@ -12,11 +12,11 @@
     cursor: pointer;
 
     &:focus {
-        outline: 2px solid $color-primary-light;
+        outline: 2px solid $color-primary-lightest;
     }
 
     &:hover {
-        background-color:$color-primary-light;
+        background-color:$color-primary-lightest;
         color: black;
         outline: white;
     }
