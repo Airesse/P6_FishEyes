@@ -1,6 +1,7 @@
 import {API} from "../api/get.js";
-//import {homepagePhotographerCard, profilpagePhotographerCard, profilpageMediaPhotoCard,profilpageMediaVideoCard, profilpageMediaCard} from "../models/templatesHTML.js";
 import {onePhotographer, oneMedia} from "../models/constructors.js"
+
+
 
 
 
@@ -39,39 +40,42 @@ export class allDatas extends API {
 
     //----Display one photographer Datas in profilpage
     async displayProfilpageDataPhotographer (id){
-        console.log ("idProfilpage=" +id)
+        //console.log ("idProfilpage=" +id)
 
         //------PHOTOGRAPHER header PART
         this.dataOnePhotographer = await this.getDataOnePhotographer(id)
-        console.log(this.dataOnePhotographer);
+        //console.log(this.dataOnePhotographer);
         
 
         //---------- one Photographer Instanciation
         let instanciation = new onePhotographer(this.dataOnePhotographer)
-        console.log (instanciation);
+        //console.log (instanciation);
 
         //-----------ProfilPage photographer card = photographer Infos + photographercard's recuperation
         let photographerCardComposition = ""
         //for(let item of instanciation){
-           photographerCardComposition = instanciation.profilpagePhotographerCard();
-           console.log(photographerCardComposition);
+        photographerCardComposition = instanciation.profilpagePhotographerCard();
+        //console.log(photographerCardComposition);
           if (!photographerCardComposition) this.getRedirectURLbyId() //REVOIR + dans factory?
         
 
         
         //------MEDIA PART
         this.dataOneMedia = await this.getDataMedia(id)
-        console.log(this.dataOneMedia);
+        //console.log(this.dataOneMedia);
         //---------- one Media (allmedia for one photographer) Instanciation
         let instanciationm = this.dataOneMedia.map (media => new oneMedia(media))
-        console.log (instanciationm);
+        //console.log (instanciationm);
         
-       //----------ProfilPage media card = media Infos) + mediacard's recuperation
+       //----------ProfilPage media card = media Infos + mediacard's recuperation
        let mediaCardComposition = ""
        for(let item of instanciationm){
            mediaCardComposition += item.profilpageMediaCard();
-           console.log (mediaCardComposition);
+           //console.log (mediaCardComposition);
        }
+
+
+
 
        //---------ProfilPage likesbar = photographer numbers of likes + price
  
@@ -79,7 +83,7 @@ export class allDatas extends API {
        const totalLikes = this.dataOneMedia.reduce((a, b) => +a + +b.likes, 0)
        for(let item of instanciationm){
         likesbar += item.profilpagePhotographerLikesBar(totalLikes);
-        console.log(likesbar);
+        //console.log(likesbar);
      };
 
 
@@ -88,15 +92,38 @@ export class allDatas extends API {
 
 
        return profilpageComposition;
-       
-       //return displayProfilpageDataPhotographer
+          
        
     }
 
- 
+    async displayProfilpageDataLightbox(id){
+        //------MEDIA PART
+        this.dataOneMedia = await this.getDataMedia(id)
+        //console.log(this.dataOneMedia);
+        //---------- one Media (allmedia for one photographer) Instanciation
+        let instanciationm = this.dataOneMedia.map (media => new oneMedia(media))
+        //console.log (instanciationm);
 
+        //---------ProfilPage LIGHTBOX
+       let lightboxComposition = ""
+       for(let item of instanciationm){
+           lightboxComposition += item.profilpageLightBoxCard()
+           console.log(lightboxComposition)
+       }
+    }
 
 } 
+
+
+
+
+
+    
+
+
+
+
+
 
 
 

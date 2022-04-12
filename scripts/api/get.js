@@ -40,12 +40,12 @@ export class API{
 
   //----Get data of only one photographer
   getDataOnePhotographer = async (id) =>{
-    console.log("id1Photographer=" +id)
+    //console.log("id1Photographer=" +id)
     try{ 
       let response = await fetch(this.dataUrl);
       let data = await response.json();
       let dataOnePhotographer= data.photographers.filter(e => e.id == id )[0];
-      console.log(dataOnePhotographer)
+      //console.log(dataOnePhotographer)
       //--------return only once array 
       return dataOnePhotographer
     }
@@ -56,12 +56,12 @@ export class API{
 
   //----Get Medias Datas only
   getDataMedia = async (id) =>{
-    console.log("idMedia="+id)
+    //console.log("idMedia="+id)
     try{ 
       let response = await fetch(this.dataUrl);
       let data = await response.json();
       let dataMedia = data.media.filter((m) => m.photographerId == id);
-      console.log("dataMedia="+dataMedia)
+      //console.log("dataMedia="+dataMedia)
     //--------return only once array 
       return dataMedia;
     }

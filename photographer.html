@@ -23,7 +23,7 @@
 
   </head>
 
-  <body>
+  <body class="bodyScroll">
 
     <header>
 
@@ -41,17 +41,22 @@
 
         <label class="widget-container" id="widget" for="widget-container">Trier par</label>
         
-        <div class="photographerMedia" id="widget-filter" tabindex="0" role="button">
-          <label class="widget-container" role="label">Popularité></label>
-          <ui class="widget-listbox" role="listbox" aria-labelledby="widget-label" style="display: none;" > <!--style="display: none;"-->
-              <li class="widget-listbox_option" role="option" id="widget-popularity" aria-selected="true" data-listbox-value="rate" data-listbox-name="Popularité">
+        <button  class="photographerMedia" id="widget-filter" tabindex="0" role="button" aria-expanded="false">
+          <div class="widget-container">
+            <p id="optionSelected"></p>
+            <div id="widget-container_arrow">
+              <div class="fas fa-chevron-down"></div>
+            </div>
+          </div>
+          <ui class="widget-listbox" role="listbox" aria-labelledby="widget-label" aria-selected="true" aria-activedescendant="dropdown-menu" > <!--style="display: none;"-->
+              <li class="widget-listbox_option" role="option" id="widget-popularity" aria-selected="true" data-listbox-value="popularity" data-listbox-name="Popularité">
                 Popularité</li>
               <li class="widget-listbox_option" role="option" id="widget-date" data-listbox-value="date" data-listbox-name="Date">
                 Date</li> 
               <li class="widget-listbox_option" role="option" id="widget-title" data-listbox-value="title" data-listbox-name="Titre">
                 Titre</li>
           </ui>
-        </div>
+        </button>
         
       </aside>
 
@@ -62,7 +67,7 @@
 
     <div class="modalLightbox" tabindex="1" aria-label="Vue complète de l'image">
 
-      <div class="lightbox">
+      <div id="lightbox">
 
         <button class="lightbox__button-previous" tabindex="1" aria-label="Sélectionner l'image précédente">
           <div class="fas fa-chevron-left"></div>
@@ -70,7 +75,7 @@
 
         <div class="lightbox__media" tabindex="1">
           <figure id="lightbox__media-figure" tabindex="1">
-            <figcaption id="lightbox__media-title" tabindex="1"></figcaption>
+            
           </figure>  
         </div>
         
@@ -86,39 +91,59 @@
 
     <div id="modalContact">
       <div class="modalContact-box">
-          <header>
-            <h2 id="modalContact-title">Contactez-moi</h2>
-            <img src="assets/icons/close.svg" class="close" />
-          </header>
+        <header>
+          <h2 >Contactez-moi</h2>
+          <h2 id="modalContact-name"></h2>
+          <img src="assets/icons/close.svg" class="close" alt="Fermer le formulaire" aria-label="close" />
+        </header>
 
-          <form id="modalContact-form">
-            <div class="formData" data-error="Le Prénom doit comporter entre 2 et 20 lettres.">  
-              <label for="contact-firstName">Prénom</label>
-              <input class="text-control" type="text" minlength='2' maxlength="20" id="contact-firstName"/>
-            </div>
+        <form id="modalContact-form">
+          <div class="formData" data-error="Le Prénom doit comporter entre 2 et 20 lettres.">  
+            <label for="contact-firstName">Prénom</label>
+            <input class="text-control" type="text" id="contact-firstName" minlength='2' maxlength="20" />
+          </div>
 
-            <div class="formData" data-error="Le Nom doit comporter entre 2 et 20 lettres.">
-              <label for="contact-lastName">Nom</label>
-              <input class="text-control" type="text" id="contact-lastName" minlength='2' maxlength="20"/>
-            </div>
+          <div class="formData" data-error="Le Nom doit comporter entre 2 et 20 lettres.">
+            <label for="contact-lastName">Nom</label>
+            <input class="text-control" type="text" id="contact-lastName" minlength='2' maxlength="20"/>
+          </div>
 
-            <div class="formData" data-error="L'adresse e-mail doit être valide."></div>  
-              <label for="contact-email">Email</label>
-              <input class="text-control" type="email" id="contact-email"/>
-            </div>
+          <div class="formData" data-error="L'adresse e-mail doit être valide."> 
+            <label for="contact-email">Email</label>
+            <input class="text-control" type="email" id="contact-email"/>
+          </div>
             
-            <div class="formData" data-error="Le message comporte maximum 250 caractères.">
-              <label for="contact-message" minlength="2" maxlength="250">Votre message</label>
-              <input class="text-control" type="text" id="contact-message"/>
-            </div>
+          <div class="formData" data-error="Le message comporte maximum 250 caractères.">
+            <label for="contact-message" minlength="2" maxlength="250">Votre message</label>
+            <input class="text-control" type="text" id="contact-message"/>
+          </div>
 
             <!--button >Envoyer</button-->
-            <input id="submit-form_button" class="btn-submit" type="submit" value="Envoyer">
-          </form>
-		  </div>
+          <input id="submit-form_button" class="btn-submit" type="submit" value="Envoyer"/>
+        </form>
+      </div>
+      
+      <!--Congrats element-->
+      <div class="congrats">
+        <!--icone X-->
+        <img src="assets/icons/close.svg"  alt="Fermer les remerciements" aria-label="close" />
+        
+        <div class="congrats-text">
+          Votre message a bien été envoyé.
+          <br>
+          Merci et à bientôt !
+        </div>
+      
+        <!--BUTTON : "Close"-->
+        <button  id="close-congrats_button" type="button">Fermer</button>
+      
+      </div>
     </div>
 
+    <script type="module" src="./scripts/modales/_modalLightbox.js"></script>
+    <script type="module" src="./scripts/modales/_modalContact.js"></script>
     <script type="module" src="./scripts/pages/photographer.js"></script>
     
+
   </body>
 </html>

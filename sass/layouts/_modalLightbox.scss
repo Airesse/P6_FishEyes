@@ -9,7 +9,7 @@
     height: 100vh;
     z-index: 5;/*à revoir*/
 
-    .lightbox{
+    #lightbox{
         @include element-center();
         position:relative;
         column-gap: 30px;
@@ -32,6 +32,19 @@
         /*buttons previous, next et close in components/ _button*/
     }
 
+    .fa-chevron-left {
+        font-size: 50px;
+        color:$color-primary;
+        cursor: pointer;
+        order: 1;
+    }
+
+    .fa-chevron-right {
+        font-size: 50px;
+        color: $color-primary;
+        cursor: pointer;
+        order: 3;
+      }
 
 }
 

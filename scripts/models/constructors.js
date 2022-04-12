@@ -14,7 +14,7 @@ export class onePhotographer{
         this.tagline = data.tagline;
         this.price = data.price;
         
-        //this.media = []; //utile ou que dans media? à revoir    
+           
     }
 
     // ----HOMEPAGE card photographer
@@ -48,7 +48,7 @@ export class onePhotographer{
                     <p class="photographerCard__sentence">${this.tagline}</p>
                 </div>
 
-                <button class="contact_button">Contactez-moi</button>
+                <button class="contact_button" id="contact_button">Contactez-moi</button>
                 
                 <div class="photographerCard">
                     <img class="photographerCard__image" src="./assets/photographers/${this.name.replace(' ','').replace('-','')}.jpg" alt="${this.name}"/>
@@ -71,12 +71,14 @@ export class oneMedia{
         this.image = data.image ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.image}` : null
         this.video = data.video ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.video}` : null
         this.fullImage = data.image ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.image}` : null
-        this.fullVideo = data.video ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.video}` : null //`assets/photographers/${id}/mediaPhotogapher/${video}.mp4`;
+        this.fullVideo = data.video ? `assets/photographers/${data.photographerId}/mediaPhotographer/${data.video}` : null 
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
+
+        this.listmedias = data; // get a list for lightbox's navigation
       
-        //this.portrait
+        
     }
 
         
@@ -84,9 +86,9 @@ export class oneMedia{
 
     profilpageMediaPhotoCard() {
         let profilpageMediaPhotoCardHTML = `
-            <article class="mediaPhotoCard">
-                <div class="mediaPhotoCard__image">
-                    <img class="mediaPhotoCard__image" src="${this.image}" alt="${this.title}"/>
+            <article class="mediaCard">
+                <div class="mediaCard__image">
+                    <img class="mediaCard__image-Photo" src="${this.image}" alt="${this.title}"/>
                 </div>
 
                 <div class="mediaCard__info">
@@ -108,11 +110,12 @@ export class oneMedia{
     profilpageMediaVideoCard() {
         let profilpageMediaVideoCardHTML = `
 
-            <article class="mediaVideoCard">
-                <div class="mediaVideoCard__video">
-                    <div class="mediaVideoCard__video-overlay"></div>
-                    <video class="mediaVideoCard__video-video">
+            <article class="mediaCard">
+                <div class="mediaCard__video">
+                    <div class="mediaCard__video-overlay"></div>
+                    <video  controls preload="autoplay" class="mediaCard__video-video">
                         <source type="video/webm" src="${this.video}"/>
+                        <p>Votre navigateur est trop ancien pour lire cette vidéo</p>
                     </video>
                 </div>
                 
@@ -126,10 +129,8 @@ export class oneMedia{
             </article>`;
 
         return profilpageMediaVideoCardHTML;
+        
     }
-
-
-
 
 
     // ----PHOTOGRAPHER PAGE card media (= card media-Photo + card media-Video)
@@ -138,6 +139,41 @@ export class oneMedia{
     profilpageMediaCard=() => {
         return this.video ? this.profilpageMediaVideoCard() : this.profilpageMediaPhotoCard();
     }
+
+
+    //---- PHOTOGRAPHER PAGE lightbox media-Photo Card
+    profilpageLightboxPhotoCard(){
+        let profilpageLightboxPhotoCardHTML = `
+        <img class="slide" id="lightbox__media-image" src="${this.fullImage}" alt="${this.title}" aria-label="${this.title}"/>
+        <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}
+        </figcaption>`
+         
+        return profilpageLightboxPhotoCardHTML
+    }
+
+    //---- PHOTOGRAPHER PAGE lightbox media-Video Card
+    profilpageLightboxVideoCard(){
+        let profilpageLightboxVideoCardHTML = `
+        <video class="slide" controls preload="auto" id="lightbox__media-video" aria-label="${this.title}">
+            <source type="video/webm" src="${this.fullVideo}"/>
+            <p>Votre navigateur est trop ancien pour lire cette vidéo</p>
+        </video>
+        <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}
+        </figcaption>`
+        
+        return profilpageLightboxVideoCardHTML
+    }
+
+    //---- PHOTOGRAPHER PAGE lightbox Card (media-photo or media-video)
+    //-------- Conditionnal operator : if condition=true, return videoCard else return photocard
+    profilpageLightboxCard=() => {
+        return this.fullVideo ? this.profilpageLightboxVideoCard() : this.profilpageLightboxPhotoCard();
+    }
+
+
+
+
+
 
     // ----PHOTOGRAPHER PAGE likes bar
     profilpagePhotographerLikesBar(totalLikes){
@@ -158,3 +194,16 @@ export class oneMedia{
 
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+

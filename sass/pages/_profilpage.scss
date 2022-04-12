@@ -2,6 +2,10 @@
     margin-top: 35px;
 }
 
+#main{
+    display: block;
+}
+
 #photographer-section {
     display: flex;
     flex-wrap: wrap;
@@ -16,7 +20,7 @@
     background-color:$color-secondary-lightest;
     height: 300px;
     width: 100%;
-    margin-bottom: 65px;/*à revoir comme titrepage*/
+    margin-bottom: 85px;/*à revoir comme titrepage*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
@@ -40,11 +44,11 @@
     }
 }
 
-.mediaPhotoCard, .mediaVideoCard{
+.mediaCard{
 
     margin: 35px 35px 35px 0;
 
-    &__image, video{
+    .mediaCard__image-Photo, .mediaCard__video-video{
         height: 270px;
         width: 270px;
         border-radius: 5px;

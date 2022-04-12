@@ -1,9 +1,4 @@
-
-/*@use "./base" as base;
-@use "./components" as components;
-@use "./layouts" as layouts;*/
-/*@import "./sass/utils/_functions.scss";*/
-/*@import "./sass/utils/_keyframes.scss";*/
+@charset "UTF-8";
 /* COLORS */
 /*element position*/
 /*@import url("photographer.css");*/
@@ -15,6 +10,16 @@
   padding: 0;
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
+}
+
+body {
+  margin: 0 auto;
+  display: block;
+}
+
+body .bodyScroll {
+  overflow: scroll;
+  height: 100%;
 }
 
 a {
@@ -79,8 +84,8 @@ header {
   margin-left: 100px;
 }
 
-/*PROFIL PAGE: photographer header - Button :"Contactez moi"*/
-.contact_button, #submit-form_button {
+/*PROFIL PAGE: photographer header - Buttons :"Contactez moi" et "Envoyer"*/
+.contact_button, #submit-form_button, #close-congrats_button {
   font-size: 20px;
   font-weight: bold;
   color: #FAFAFA;
@@ -93,14 +98,18 @@ header {
   cursor: pointer;
 }
 
-.contact_button:focus, #submit-form_button:focus {
+.contact_button:focus, #submit-form_button:focus, #close-congrats_button:focus {
   outline: 2px solid #DB8876;
 }
 
-.contact_button:hover, #submit-form_button:hover {
+.contact_button:hover, #submit-form_button:hover, #close-congrats_button:hover {
   background-color: #DB8876;
   color: black;
   outline: white;
+}
+
+#submit-form_button:hover, #submit-form_button:focus, #close-congrats_button:hover, #close-congrats_button:focus {
+  background-color: #e54858;
 }
 
 /*PROFIL PAGE: ModalLightbox buttons */
@@ -174,7 +183,7 @@ header {
           transform: rotate(-45deg);
 }
 
-/*@import url("photographer.css");*/
+/*MODAL CONTACT : FORM COMPOSITION*/
 form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -187,16 +196,6 @@ form {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  /*button {
-        font-weight: 400;
-        margin-top: 30px;
-    }*/
-}
-
-form label {
-  color: #312E2E;
-  /*a reverifier*/
-  font-size: 36px;
 }
 
 form div {
@@ -211,28 +210,26 @@ form div {
   -webkit-box-align: self-start;
       -ms-flex-align: self-start;
           align-items: self-start;
-  margin-bottom: 26px;
+  margin-bottom: 10px;
 }
 
-form input {
+form div label {
+  color: #312E2E;
+  /*a reverifier*/
+  font-size: 36px;
+}
+
+form div input, form div #contact-email {
   width: 100%;
   height: 68px;
   border: none;
   border-radius: 5px;
+  /*padding: 7px 0; /*à reverifier*/
 }
 
-form input#contact-message {
-  border: none;
-  border-radius: 5px;
-  resize: none;
-  width: 100%;
-  height: 170px;
-}
-
-.text-control {
-  /* text written by user*/
+form div input .text-control, form div #contact-email .text-control {
   margin: 0;
-  padding: 8px;
+  padding: 2px 2px;
   width: 100%;
   border-radius: 8px;
   font-size: 20px;
@@ -240,21 +237,28 @@ form input#contact-message {
   outline: transparent solid 2px;
 }
 
+form div #contact-message {
+  border: none;
+  border-radius: 5px;
+  resize: none;
+  width: 100%;
+  height: 170px;
+}
+
 /*------------Data error*/
 input[data-error]::after {
   content: attr(data-error);
-  font-size: small;
+  font-size: large;
   color: #e54858;
 }
 
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: small;
+  font-size: large;
   font-weight: 600;
   color: #e54858;
   display: block;
   margin-top: 7px;
-  margin-bottom: 7px;
   text-align: left;
   line-height: 0.3;
   opacity: 0;
@@ -275,14 +279,18 @@ input[data-error]::after {
   outline: 2px solid #e54858;
 }
 
+/*-----MODALCONTACT = BOX element (header+form) + CONGRATS element----*/
 #modalContact {
   display: none;
   top: 0;
   position: fixed;
-  background-color: white;
-  opacity: 0.5;
-  /*revoir*/
+  background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -291,12 +299,12 @@ input[data-error]::after {
           align-items: center;
 }
 
+/*----ModalContact box = HEADER + FORM----*/
 .modalContact-box {
   position: relative;
   border-radius: 5px;
   background-color: #DB8876;
   width: 45%;
-  height: 810px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -307,37 +315,116 @@ input[data-error]::after {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   padding: 35px;
   margin: auto;
   margin-top: 2.8%;
+  opacity: 1;
+  /*.contact_button : in _buttons.scss*/
 }
 
 .modalContact-box header {
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   width: 100%;
+  height: 17%;
+  margin-bottom: 30px;
 }
 
 .modalContact-box header img {
   cursor: pointer;
   position: absolute;
-  top: 50px;
-  right: 50px;
+  top: 40px;
+  right: 40px;
+  width: 7%;
+  height: 7%;
 }
 
 .modalContact-box header h2 {
-  font-size: 62px;
+  font-size: xxx-large;
   color: black;
-  font-weight: 400;
-  text-align: center;
+  font-weight: 700;
   margin-bottom: 8px;
 }
 
-/*.contact_button : in _buttons.scss*/
+.modalContact-box form {
+  height: 83%;
+  /* + details in _form.scss*/
+}
+
+/*----ModalContact CONGRATS element----*/
+/*photographer page- modalContact open- form validation ok*/
+.congrats {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 43%;
+  height: 700px;
+  margin: 2.8% auto;
+  background-color: #DB8876;
+  border-radius: 5px;
+}
+
+.congrats img {
+  /*icone X(close)*/
+  cursor: pointer;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-right: 40px;
+  margin-top: 40px;
+}
+
+.congrats .congrats-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.congrats #close-congrats_button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 10%;
+}
+
 .modalLightbox {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -363,7 +450,7 @@ input[data-error]::after {
   /*à revoir*/
 }
 
-.modalLightbox .lightbox {
+.modalLightbox #lightbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -386,7 +473,7 @@ input[data-error]::after {
   width: 900px;
   height: 800px;
   margin-top: 63px;
-  /*buttons previous, next et close in _button*/
+  /*buttons previous, next et close in components/ _button*/
 }
 
 .modalLightbox .lightbox__media#lighbox__media-figure {
@@ -398,7 +485,24 @@ input[data-error]::after {
   /*box-shadow: $color-secondary-light 3px 3px 3px;/*à revoir les px*/
 }
 
-/*@import "./sass/components/_lightbox.scss";*/
+.modalLightbox .fa-chevron-left {
+  font-size: 50px;
+  color: #901C1C;
+  cursor: pointer;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.modalLightbox .fa-chevron-right {
+  font-size: 50px;
+  color: #901C1C;
+  cursor: pointer;
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
 .boxLikes-bar {
   position: fixed;
   bottom: 0;
@@ -447,6 +551,7 @@ input[data-error]::after {
   margin-left: 100px;
   width: 100%;
   height: 75px;
+  opacity: 1;
   /*margin-bottom: 35px;*/
 }
 
@@ -720,6 +825,10 @@ header h1 {
   margin-top: 35px;
 }
 
+#main {
+  display: block;
+}
+
 #photographer-section {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -737,7 +846,7 @@ header h1 {
   background-color: #FAFAFA;
   height: 300px;
   width: 100%;
-  margin-bottom: 65px;
+  margin-bottom: 85px;
   /*à revoir comme titrepage*/
   display: -ms-grid;
   display: grid;
@@ -772,11 +881,11 @@ header h1 {
      object-fit: cover;
 }
 
-.mediaPhotoCard, .mediaVideoCard {
+.mediaCard {
   margin: 35px 35px 35px 0;
 }
 
-.mediaPhotoCard__image, .mediaPhotoCard video, .mediaVideoCard__image, .mediaVideoCard video {
+.mediaCard .mediaCard__image-Photo, .mediaCard .mediaCard__video-video {
   height: 270px;
   width: 270px;
   border-radius: 5px;
@@ -785,7 +894,7 @@ header h1 {
   padding-bottom: 5px;
 }
 
-.mediaPhotoCard .mediaCard__info, .mediaVideoCard .mediaCard__info {
+.mediaCard .mediaCard__info {
   width: 270px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -796,6 +905,4 @@ header h1 {
   color: #901C1C;
   /*dislay grid a faire a la place*/
 }
-
-/* @import page à rajouter si non vide*/
 /*# sourceMappingURL=style.css.map */

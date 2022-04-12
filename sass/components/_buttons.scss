@@ -1,5 +1,5 @@
 /*PROFIL PAGE: photographer header - Buttons :"Contactez moi" et "Envoyer"*/
-.contact_button, #submit-form_button {
+.contact_button, #submit-form_button, #close-congrats_button {
     font-size: 20px;
     font-weight: bold;
     color:$color-secondary-lightest;
@@ -21,6 +21,12 @@
         outline: white;
     }
     
+}
+
+#submit-form_button, #close-congrats_button{
+    &:hover, &:focus{
+    background-color: $form-dataError;
+    }
 }
 
 /*PROFIL PAGE: ModalLightbox buttons */

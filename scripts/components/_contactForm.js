@@ -5,13 +5,12 @@
 //Regular Expressions (Regex)
 const regexName = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,'-]{2,20}$/;
 const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-const regexNumberOfCharacters = /^[A-Z]{1,250}$/;
+const regexNumberOfCharacters = /^[a-zA-Z0-9]{2,250}$/; // letters and numbers; 2<lenght<250
 
 //DOM elements
 const firstName = document.querySelector("#contact-firstName");
 const lastName = document.querySelector("#contact-lastName");
 const email = document.querySelector("#contact-email");
-
 const message = document.querySelector("#contact-message");
 
 
@@ -116,6 +115,29 @@ export function hideTextError(el){
     console.log("no error");
 };
 
+//CONTACT FORM : actions to be taken when submitting the form
 
 
 
+
+//DOM element
+/*const modalForm = document.querySelector(".modalContact-box");
+
+// Form validity event
+modalForm.addEventListener("submit", e => {
+  console.log("go ok")
+  e.preventDefault();//stop form refresh by navigator
+
+  if (formDataValidation()) {
+    console.log("formData validation true")
+    openModal(); 
+    //openModalCongrats();
+      
+  } else{
+    console.log("formData validation false")
+    return false;
+  }
+  return false
+});
+
+*/
