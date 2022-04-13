@@ -144,9 +144,11 @@ export class oneMedia{
     //---- PHOTOGRAPHER PAGE lightbox media-Photo Card
     profilpageLightboxPhotoCard(){
         let profilpageLightboxPhotoCardHTML = `
-        <img class="slide" id="lightbox__media-image" src="${this.fullImage}" alt="${this.title}" aria-label="${this.title}"/>
-        <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}
-        </figcaption>`
+        <figure id="lightbox__media-figure" tabindex="1">    
+            <img class="slide" id="lightbox__media-image" src="${this.fullImage}" alt="${this.title}" aria-label="${this.title}"/>
+            <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}</figcaption>
+        </figure>
+        `
          
         return profilpageLightboxPhotoCardHTML
     }
@@ -154,18 +156,19 @@ export class oneMedia{
     //---- PHOTOGRAPHER PAGE lightbox media-Video Card
     profilpageLightboxVideoCard(){
         let profilpageLightboxVideoCardHTML = `
-        <video class="slide" controls preload="auto" id="lightbox__media-video" aria-label="${this.title}">
-            <source type="video/webm" src="${this.fullVideo}"/>
-            <p>Votre navigateur est trop ancien pour lire cette vidéo</p>
-        </video>
-        <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}
-        </figcaption>`
+        <figure id="lightbox__media-figure" tabindex="1"> 
+            <video class="slide" controls preload="auto" id="lightbox__media-video" aria-label="${this.title}">
+                <source type="video/webm" src="${this.fullVideo}"/>
+                <p>Votre navigateur est trop ancien pour lire cette vidéo</p>
+            </video>
+            <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}</figcaption>
+        </figure>`
         
         return profilpageLightboxVideoCardHTML
     }
 
     //---- PHOTOGRAPHER PAGE lightbox Card (media-photo or media-video)
-    //-------- Conditionnal operator : if condition=true, return videoCard else return photocard
+    //-------- Conditionnal operator : if condition=true, return fullvideoCard else return fullphotocard
     profilpageLightboxCard=() => {
         return this.fullVideo ? this.profilpageLightboxVideoCard() : this.profilpageLightboxPhotoCard();
     }

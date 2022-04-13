@@ -1,3 +1,6 @@
+/////////////FORM DATA then FORM DATA ERROR
+
+
 
 ////////FORM DATA : Conditions for validating each field/Data of the form
 
@@ -14,12 +17,6 @@ const email = document.querySelector("#contact-email");
 const message = document.querySelector("#contact-message");
 
 
-
-//----Collect User Data
-
-let validationData;
-
-
 //Functions
 
 //----Test FormData validity
@@ -33,6 +30,7 @@ export function formDataValidation(){
             validationData-- ;
         } else {
             hideTextError(firstName);
+            console.log("Prénom :" +firstName.value);
         }
      
 
@@ -43,6 +41,7 @@ export function formDataValidation(){
             validationData-- ;
         } else {
             hideTextError(lastName);
+            console.log("Nom :" +lastName.value);
         } 
     
 
@@ -53,14 +52,16 @@ export function formDataValidation(){
             validationData-- ;
         } else {
             hideTextError(email);
+            console.log("email :" +email.value);
         } 
     
 
      
-    // --------Number of Games : 0-250  
+    // --------Message: 2 <lenght< 250  
     
         if (message.value.trim().match(regexNumberOfCharacters)){
-            hideTextError(message);                              
+            hideTextError(message);
+            console.log("message :" +message.value);                              
         } else {
             showTextError(message);
             validationData-- ;        
@@ -93,51 +94,24 @@ export function formDataValidation(){
 ////////FORM DATA ERROR : actions to be performed when there are (or not) errors in the filling of fields by the user 
 
 
-//DOM elements
-//const modalForm = document.querySelector("#modalContact-form");
-
-
 //Functions
 
 //----Show text error for each element
 export function showTextError(el){
 
-    // attribut data-error-visible="true"
+    // --------attribut data-error-visible="true"
     el.closest(".formData").dataset.errorVisible = true;
-    console.log("error");
+    //console.log("error");
 };
 
 //----Hide text error for each element
 export function hideTextError(el){
 
-    // attribut data-error-visible=null
+    //-------attribut data-error-visible=null
     el.closest(".formData").dataset.errorVisible = null; 
-    console.log("no error");
+    //console.log("no error");
 };
 
-//CONTACT FORM : actions to be taken when submitting the form
 
 
 
-
-//DOM element
-/*const modalForm = document.querySelector(".modalContact-box");
-
-// Form validity event
-modalForm.addEventListener("submit", e => {
-  console.log("go ok")
-  e.preventDefault();//stop form refresh by navigator
-
-  if (formDataValidation()) {
-    console.log("formData validation true")
-    openModal(); 
-    //openModalCongrats();
-      
-  } else{
-    console.log("formData validation false")
-    return false;
-  }
-  return false
-});
-
-*/

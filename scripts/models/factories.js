@@ -13,6 +13,7 @@ import {onePhotographer, oneMedia} from "../models/constructors.js"
 export class allDatas extends API {
     dataOnePhotographer = null;
     dataOneMedia = null;
+    dataLightbox = null;
 
     //----Display photographers Datas in Homepage
     async displayHomepageDataPhotographers () {
@@ -96,21 +97,69 @@ export class allDatas extends API {
        
     }
 
-    async displayProfilpageDataLightbox(id){
+    async displayProfilpageAllDatasLightbox(id){
+        
         //------MEDIA PART
-        this.dataOneMedia = await this.getDataMedia(id)
-        //console.log(this.dataOneMedia);
+        this.dataLightbox = await this.getDataMedia(id);
+        //console.log("datalightbox"+this.dataLightbox);
         //---------- one Media (allmedia for one photographer) Instanciation
-        let instanciationm = this.dataOneMedia.map (media => new oneMedia(media))
-        //console.log (instanciationm);
+        let instanciationL = this.dataLightbox.map (media => new oneMedia(media));
+        //console.log ("instanciationL"+instanciationL);
 
         //---------ProfilPage LIGHTBOX
-       let lightboxComposition = ""
-       for(let item of instanciationm){
-           lightboxComposition += item.profilpageLightBoxCard()
-           console.log(lightboxComposition)
-       }
+        /*let lightboxOneMediaHTML = "";
+        for(let item of instanciationL){
+        console.log("item"+item);
+        lightboxOneMediaHTML += item.profilpageLightboxCard();
+        console.log("lightOneMedia="+lightboxOneMediaHTML)
+        return lightboxOneMediaHTML
+        };*/
+
+        let lightboxAllMediasHTML = [];
+        for(let item of instanciationL){
+        //console.log("item"+item);
+        lightboxAllMediasHTML += item.profilpageLightboxCard();
+        //console.log("lightboxAllMediasHTML="+lightboxAllMediasHTML)
+        
+        };
+
+        
+
+        return lightboxAllMediasHTML;
+
     }
+
+
+    async displayProfilpageDataLightbox(id){
+        
+        //------MEDIA PART
+        this.dataLightbox = await this.getDataMedia(id);
+        //console.log("datalightbox"+this.dataLightbox);
+        //---------- one Media (allmedia for one photographer) Instanciation
+        let instanciationL = this.dataLightbox.map (media => new oneMedia(media));
+        //console.log ("instanciationL"+instanciationL);
+
+        //---------ProfilPage LIGHTBOX One media
+        let lightboxOneMediaHTML = "";
+        for(let item of instanciationL){
+        //console.log("item"+item);
+        lightboxOneMediaHTML += item.profilpageLightboxCard();
+        console.log("lightboxOneMediaHTML="+lightboxOneMediaHTML)
+        return lightboxOneMediaHTML
+        };
+
+
+        
+        
+
+        
+
+        return ;
+
+    }
+
+
+
 
 } 
 

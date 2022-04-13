@@ -42,8 +42,8 @@
         <label class="widget-container" id="widget" for="widget-container">Trier par</label>
         
         <button  class="photographerMedia" id="widget-filter" tabindex="0" role="button" aria-expanded="false">
-          <div class="widget-container">
-            <p id="optionSelected"></p>
+          <div class="widget-container" id="widget-container_textVisible">
+            <p id="optionSelected">Popularité</p>
             <div id="widget-container_arrow">
               <div class="fas fa-chevron-down"></div>
             </div>
@@ -68,15 +68,15 @@
     <div class="modalLightbox" tabindex="1" aria-label="Vue complète de l'image">
 
       <div id="lightbox">
-
+        <!--icone X (close)-->
+        <img src="assets/icons/close.svg" class="close" id="lightbox__button-close" alt="Fermer la lightbox" aria-label="close" />
+        
         <button class="lightbox__button-previous" tabindex="1" aria-label="Sélectionner l'image précédente">
           <div class="fas fa-chevron-left"></div>
         </button>
 
         <div class="lightbox__media" tabindex="1">
-          <figure id="lightbox__media-figure" tabindex="1">
-            
-          </figure>  
+  
         </div>
         
         <button class="lightbox__button-next" tabindex="1" aria-label="Sélectionner l'image suivante">
@@ -126,7 +126,7 @@
       <!--Congrats element-->
       <div class="congrats">
         <!--icone X-->
-        <img src="assets/icons/close.svg"  alt="Fermer les remerciements" aria-label="close" />
+        <img  id="close-congrats_iconeX" src="assets/icons/close.svg"  alt="Fermer les remerciements" aria-label="close" />
         
         <div class="congrats-text">
           Votre message a bien été envoyé.
@@ -140,6 +140,7 @@
       </div>
     </div>
 
+    <script type="module" src="./scripts/components/_widget.js"> </script>
     <script type="module" src="./scripts/modales/_modalLightbox.js"></script>
     <script type="module" src="./scripts/modales/_modalContact.js"></script>
     <script type="module" src="./scripts/pages/photographer.js"></script>

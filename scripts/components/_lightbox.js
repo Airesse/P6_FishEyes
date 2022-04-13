@@ -3,7 +3,7 @@ import {oneMedia} from "../models/constructors.js";
 import {allDatas} from "../models/factories.js";
 
 
-let slideIndex = 1;//utile? voir portée variable suffisante dans fonction?
+//let slideIndex = 1;//utile? voir portée variable suffisante dans fonction?
 
 
 

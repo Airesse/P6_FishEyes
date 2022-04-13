@@ -4,25 +4,25 @@ import {start} from "../pages/photographer.js"
 import {allDatas} from "../models/factories.js";
 import {onePhotographer, oneMedia} from "../models/constructors.js"
 
-//const photographerSectionHeader = document.querySelector('.photographerCard') //profilpage
+/*Function StartForm, 
+** then functions (open/close) for modal and modal'element (form + congrats)
+** then modal Events listenner
+*/
+
+
+//DOM ELEMENT
 const formPhotographerName = document.querySelector("#modalContact-name")
 
 export let startForm = async() => {
 
-    console.log ("startForm ok");
-    try{
-
-      
-      //-----research by id
-      
+    //console.log ("startForm ok");
+    try{ 
+      //-----research by id      
         const pointUrl = new URL(window.location.href); // pointage url
         let photographerId = pointUrl.searchParams.get("id"); // productId = url + id
-      
         const newapi = new API()
         let photographer= await newapi.getDataOnePhotographer(photographerId);
-
-        console.log(photographer)
-        console.log(formPhotographerName)
+      //-----insertion photographer's name in "form"'s header
         formPhotographerName.innerHTML = photographer.name
         //console.log(photographerCard__name)
     }
@@ -53,10 +53,10 @@ let modalCongrats = document.querySelector(".congrats"); // congrats element
 
 let photographerCardBtnContact = document.querySelector("#contact_button");//button "Contact me" on card photographer
 console.log ("contactbutton =" +photographerCardBtnContact)
-let modalCloseX = document.querySelector(".close");//"icone" X on form and lightbox
+let modalCloseX = document.querySelector(".close");//"icone" X on form
 let modalBtnGo = document.querySelector("#submit-form_button");//button "Envoyer" on form 
 let CongratsBtnClose = document.querySelector("#close-congrats_button");//button "Close" on Congrats
-
+let CongratsIconeX = document.querySelector("#close-congrats_iconeX")
 
 
 //Functions
@@ -65,7 +65,7 @@ export function openModalContact(){
     widget.style.opacity = "0.8";
     modalContactContainer.style.display = "block";
     modalContactContainer.focus();
-    console.log("openModal OK");
+    //console.log("openModal OK");
 };
 
 export function closeModalContact(){
@@ -74,7 +74,7 @@ export function closeModalContact(){
     widget.style.opacity = "1";
     
     bodyScroll.style.overflow = "scroll"
-    console.log("closeModal OK");
+    //console.log("closeModal OK");
 };
 
 export function openModalContactForm(){
@@ -82,7 +82,7 @@ export function openModalContactForm(){
     modalContactForm.style.display = "flex";
     
     //modalContactForm.reset(); //clear all previous form data and error or other method
-    console.log("openModalForm OK");
+    //console.log("openModalForm OK");
 };
 
 export function openModalCongrats(){
@@ -102,30 +102,23 @@ export function openModalCongrats(){
 //----Modal"Contact" with form
 
     //----------CONTACT modal : open/close
-    //let modalCloseX = this.modal.querySelector(".close")
-    //let modalContactForm = this.modal.querySelector(".modalContact-box");
-    
-    /*photographerCardBtnContact.addEventListener("click", () => {
-      console.log("clic");
-      openModalContact();
-      openModalContactForm();
-    });*/
+
     modalCloseX.addEventListener("click", closeModalContact);   
-    //modalContactForm.addEventListener ("submit", submitForm)
+
 
 
     //----------CONTACT FORM : actions to be taken when submitting the form
     modalContactForm.addEventListener("submit", e => {
-        console.log("go ok")
+        //console.log("go ok")
         e.preventDefault();//stop form refresh by navigator
       
         if (formDataValidation()) {
-          console.log("formData validation true")
+          //console.log("formData validation true")
           openModalContact(); 
           openModalCongrats();
             
         } else{
-          console.log("formData validation false")
+          //console.log("formData validation false")
           return false;
         }
         return false
@@ -133,9 +126,9 @@ export function openModalCongrats(){
     ) 
   
   
-  //----Modal with Congrats
+  //----Modal with Congrats: open/close
   
   modalBtnGo.addEventListener("click", openModalContact, openModalCongrats);
   CongratsBtnClose.addEventListener("click", closeModalContact);
-      
+  CongratsIconeX.addEventListener("click", closeModalContact);    
   

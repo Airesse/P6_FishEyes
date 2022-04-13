@@ -3,12 +3,13 @@ import {oneMedia} from "../models/constructors.js";
 import {allDatas} from "../models/factories.js";
 
 //DOM ELEMENT
-  const selected = document.getElementById("optionSelected");
-  const popularity = document.getElementById("widget-popularity");
-  const date = document.getElementById("widget-date");
-  const title = document.getElementById("widget-title");
-  const listUl = document.querySelector(".widget-listbox");
+  const selected = document.querySelector("#optionSelected");//p
+  const popularity = document.getElementById("widget-popularity");//li
+  const date = document.getElementById("widget-date");//li
+  const title = document.getElementById("widget-title");//li
+  const listUl = document.querySelector(".widget-listbox");//ui
   const widgetList = document.querySelector("#widget");
+
   const arrow = document.querySelector("#widget-container_arrow");
     
   const photographersPortfolio = document.querySelectorAll(".mediaCard");// class de l'article
@@ -17,17 +18,22 @@ import {allDatas} from "../models/factories.js";
 //DISPLAY WIDGET 
 
 export let displayProfilpageWidget = async() => {
+  let dataOneMedia = null;
+// get datas   
 
-// get datas    
-    displayProfilpageDataPhotographer (id);
+  const url = new URL(window.location.href); // pointage url
+  let id = url.searchParams.get("id"); // productId = url + id
+ 
+  let profilpage = new allDatas();
+  let profilpageHtml = await profilpage.displayProfilpageDataPhotographer(id)
+  //-----insertion defaut option's title in widget
+  selected.innerHTML = "Popularité";
+ 
 
 
 //-----function : display widget 
   function widget() {
-    if (
-      !listUl.getAttribute("style") ||
-      listUl.getAttribute("style") === "display: none;"
-    ) {
+    if (!listUl.getAttribute("style") || listUl.getAttribute("style") === "display: none;") {
       listUl.style.display = "block";
       arrow.classList.add("arrow-move");
       widgetList.setAttribute("aria-expanded", "true");
