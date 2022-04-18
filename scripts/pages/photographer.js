@@ -7,7 +7,7 @@ import {allDatas} from "../models/factories.js";
 import { closeModalContact, openModalContact, openModalContactForm, startForm,} from "../modales/_modalContact.js";
 import { formDataValidation, showTextError, hideTextError } from "../components/_contactForm.js";
 import { startLightbox } from "../modales/_modalLightbox.js";
-import {displayProfilpageWidget, } from "../components/_widget.js"
+import {displayProfilpageWidget,widget,sortByTitle,sortByPopularity,sortByDate } from "../components/_widget.js"
 //import {init} from "./index.js"
 
 
@@ -35,9 +35,7 @@ export let start = async() => {
     let lightboxOneMediaHTML = await profilpage.displayProfilpageDataLightbox(id)
     console.log("lightboxOneMediaHTML="+lightboxOneMediaHTML)
 
-   //----recuperate widget datas (?)
-    //let widgetDatas = await profilpage.displayProfilpageWidget
-    //console.log("widgetDatas="+widgetDatas)
+
 
 
     console.info('DOM loaded');
@@ -56,10 +54,9 @@ export let start = async() => {
 
     //----WIDGET filter
     let widgetFilterBtn = document.querySelector("#widget-filter");//button
-    let widgetVisibleOption = document.querySelector("#widget-container_textVisible");
+    
     widgetFilterBtn.addEventListener("click", () => {
       console.log("widgetstart ok")
-      //widgetVisibleOption.style.display="none"
       displayProfilpageWidget();
     });
 
@@ -70,7 +67,8 @@ export let start = async() => {
     //const lightbox = document.getElementById("lightbox");
     const lightboxMediaCard = document.querySelector(".lightbox__media");
     console.log("lightboxMediaCard"+lightboxMediaCard)
-   
+    const lightboxAllMedias = document.querySelectorAll(".lightbox__media");
+    console.log("lightboxAllMedias="+lightboxAllMedias)
 
 
     //----inject datas in page photographer.html
@@ -85,25 +83,26 @@ export let start = async() => {
     //----lightbox behaviour
     //--------open lightbox and fullsize media on click on media
     
+    startLightbox()
 
-    /*lightboxMediaCard.forEach(media => {
+    /*for (let media of lightboxAllMedias) {
         media.addEventListener("click", e => {
             e.preventDefault();
-            startLightbox()
+            
             openLightbox();
             currentSlide(0)
             showSlide(slideIndex);
         });
-    });*/
+    };*/
 
-    lightboxMediaUnit.addEventListener("click", e => {
+    /*lightboxMediaUnit.addEventListener("click", e => {
       console.log("click lightbox ok")
       e.preventDefault();
       startLightbox()
       openLightbox();
       currentSlide(0)
       showSlide(slideIndex);
-    });
+    });*/
 
 
     }

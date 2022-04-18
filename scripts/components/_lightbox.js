@@ -3,15 +3,16 @@ import {oneMedia} from "../models/constructors.js";
 import {allDatas} from "../models/factories.js";
 
 
-//let slideIndex = 1;//utile? voir portée variable suffisante dans fonction?
+let slideIndex = 1;//utile? voir portée variable suffisante dans fonction?
 
 
 
 //Display slides from one photographer's medias
 export function showSlide(n) {
   
-  let slideIndex = 1;
+  //let slideIndex = 1;
   let mediaSlides = document.querySelectorAll(".slide");
+  
 
   if (n > mediaSlides.length) {
       slideIndex = 1;
@@ -43,7 +44,7 @@ export function changeSlide(n) {
   
 // Thumbnail image/video controls
 export function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlide(slideIndex = n);
 }
 
 

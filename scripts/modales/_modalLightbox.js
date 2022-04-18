@@ -2,15 +2,18 @@ import {API} from "../api/get.js"
 import {start} from "../pages/photographer.js"
 import {allDatas} from "../models/factories.js";
 import {onePhotographer, oneMedia} from "../models/constructors.js"
-import {showSlide, changeSlide, currentSlide} from "../components/_lightbox.js"
+//import {showSlide, changeSlide, currentSlide} from "../components/_lightbox.js"
 
 //DOM ELEMENTS
 const modalLightbox = document.querySelector(".modalLightbox")
 const lightbox = document.getElementById("lightbox");
-const lightboxMediaBox = document.querySelector(".lightbox__media");
+let lightboxAllMedias = null;
+let slideIndex = 0; 
+const lightboxMedias = document.querySelector(".lightbox__media");
 const lightboxMediaUnit = document.querySelector("#lightbox__media-figure")
 
 const btnClose = document.querySelector("#lightbox__button-close");
+console.log(btnClose);
 const btnPrevious= document.querySelector(".lightbox__button-previous");
 const btnNext = document.querySelector(".lightbox__button-next");
 
@@ -21,61 +24,121 @@ const pointUrl = new URL(window.location.href);//pointage URL
 
 //FUNCTIONS
 
-export function openLightbox() {
-    modalLightbox.style.display= "block";
-    body.classList.add("no-scroll");
+export function openLightbox(e) {
     console.log("openlightbox ok")
+    modalLightbox.style.display= "flex";
+    document.body.classList.add("no-scroll");
+    
+
+    //----media select by click: position in lightbox
+    
+    //method1: index by indeOf
+    let figure = e.target.parentNode.parentNode
+    console.log(figure)
+    //position=[...figure.parentNode.children].indexOf(figure)
+    //console.log("position="+position)
+
+    //method2: index each media
+    slideIndex = parseInt(figure.dataset.position);
+    console.log(figure.dataset.position);
+    
+
+    //----to display in HTML (utile? voir photographer.js)
+    lightboxInject(figure.dataset.position);
+   
 }
 
 export function closeLightbox() {
     modalLightbox.style.display = "none";
-    body.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
+   
     console.log("closelightbox ok")
 }
 
-//EVENTS
+export let lightboxInject= (position)=>{
+    console.log(lightboxMedias);
+    console.log(lightboxAllMedias)
+    console.log(position)
+    lightboxMedias.innerHTML = lightboxAllMedias[position].innerHTML
+    
+   
+    console.log("lightboxInjectOK")
+    
+}
 
-export let startLightbox = async(listmedias) => {    
+// Lightbox EVENTS Listeners
+
+export let startLightbox = () => {    
     console.log("startLightbox OK")
-    //----recuperate lightbox datas
-
-    let profilpage = new allDatas();
-    let lightboxOneMediaHTML = await profilpage.displayProfilpageDataLightbox(id);
-;   console.log("lightboxOneMediaHTML=" +lightboxOneMediaHTML)
-
-    //----inject data in page photographer.html
-    lightboxMediaUnit.innerHTML += lightboxOneMediaHTML;
-    console.log(" lightboxMediaUnitL=" +lightboxMediaUnit)
     
     
 
     //----lightbox behaviour
     
     //--------open lightbox and fullsize media on click on media
-    this.listmedias.forEach(media => {
+    lightboxAllMedias = document.querySelectorAll("article");
+    console.log(lightboxAllMedias);
+    
+    for (let media of lightboxAllMedias) {
         media.addEventListener("click", e => {
             e.preventDefault();
-            openLightbox(lightboxModal);
-            currentSlide(0)
+            console.log("click")
+            openLightbox(e);
+            
             showSlide(slideIndex);
         });
-    });
+    };
 
     
-    //-------close lightbox on click on icone close
+    //-------close lightbox on click on button X
     btnClose.addEventListener("click", e => {
         e.preventDefault();
-        closeLightbox(lightboxModal);
+        closeLightbox();
     });
 
     //-------lightbox navigation by click on previous/next buttons 
     btnPrevious.addEventListener("click", e => {
         e.preventDefault();
-        changeSlide(-1);
+        showSlide(-1);
     });
 
     btnNext.addEventListener("click", e => {
         e.preventDefault();
-        changeSlide(1);
+        showSlide(+1);
     });    
 }
+
+
+
+
+
+//Display slides from one photographer's medias
+export function showSlide(n) {
+
+    slideIndex += n;
+    console.log(slideIndex)
+    console.log(lightboxAllMedias.length);
+
+ if (slideIndex >= lightboxAllMedias.length) {
+     //console.log(lightboxAllMedias.length);
+      slideIndex = 0;
+  }
+
+  if (slideIndex < 0) {
+      slideIndex = lightboxAllMedias.length;
+  }
+
+  lightboxInject(slideIndex)
+
+
+ 
+}
+
+
+
+
+
+
+
+
+  

@@ -65,9 +65,13 @@ export class allDatas extends API {
         this.dataOneMedia = await this.getDataMedia(id)
         //console.log(this.dataOneMedia);
         //---------- one Media (allmedia for one photographer) Instanciation
-        let instanciationm = this.dataOneMedia.map (media => new oneMedia(media))
-        //console.log (instanciationm);
+        let position=-1; // no zero
+        let instanciationm = this.dataOneMedia.map (media => {
+            position ++
+            //console.log (instanciationm);
+            return new oneMedia(media, position)
         
+        })
        //----------ProfilPage media card = media Infos + mediacard's recuperation
        let mediaCardComposition = ""
        for(let item of instanciationm){
@@ -103,8 +107,13 @@ export class allDatas extends API {
         this.dataLightbox = await this.getDataMedia(id);
         //console.log("datalightbox"+this.dataLightbox);
         //---------- one Media (allmedia for one photographer) Instanciation
-        let instanciationL = this.dataLightbox.map (media => new oneMedia(media));
-        //console.log ("instanciationL"+instanciationL);
+        let position = -1//no zero
+        let instanciationL = this.dataLightbox.map (media => {
+      
+            position ++
+           //console.log ("instanciationL"+instanciationL);
+            return new oneMedia(media, position);
+        })
 
         //---------ProfilPage LIGHTBOX
         /*let lightboxOneMediaHTML = "";
@@ -115,17 +124,17 @@ export class allDatas extends API {
         return lightboxOneMediaHTML
         };*/
 
-        let lightboxAllMediasHTML = [];
+        /*let lightboxAllMedias = document.querySelectorAll(".lightbox__media");
         for(let item of instanciationL){
         //console.log("item"+item);
-        lightboxAllMediasHTML += item.profilpageLightboxCard();
-        //console.log("lightboxAllMediasHTML="+lightboxAllMediasHTML)
+        lightboxAllMedias += item.profilpageLightboxCard();
+        console.log("lightboxAllMedias="+lightboxAllMedias)
         
         };
 
         
 
-        return lightboxAllMediasHTML;
+        return lightboxAllMediasHTML;*/
 
     }
 
@@ -140,13 +149,13 @@ export class allDatas extends API {
         //console.log ("instanciationL"+instanciationL);
 
         //---------ProfilPage LIGHTBOX One media
-        let lightboxOneMediaHTML = "";
+       /* let lightboxOneMediaHTML = "";
         for(let item of instanciationL){
         //console.log("item"+item);
         lightboxOneMediaHTML += item.profilpageLightboxCard();
         console.log("lightboxOneMediaHTML="+lightboxOneMediaHTML)
         return lightboxOneMediaHTML
-        };
+        };*/
 
 
         

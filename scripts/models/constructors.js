@@ -63,7 +63,7 @@ export class onePhotographer{
 //PHOTOGRAPH PAGE : Create objet "Media spécifique d'un photographe"
 export class oneMedia{
 
-    constructor(data){
+    constructor(data, position){
         this.id = data.id;
         this.photographerId = data.photographerId;
         this.title = data.title;
@@ -75,6 +75,7 @@ export class oneMedia{
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
+        this.position = position;
 
         this.listmedias = data; // get a list for lightbox's navigation
       
@@ -86,7 +87,7 @@ export class oneMedia{
 
     profilpageMediaPhotoCard() {
         let profilpageMediaPhotoCardHTML = `
-            <article class="mediaCard">
+            <article class="mediaCard" data-title=${this.title} data-likes=${this.likes} data-date=${this.date} data-position="${this.position}">
                 <div class="mediaCard__image">
                     <img class="mediaCard__image-Photo" src="${this.image}" alt="${this.title}"/>
                 </div>
@@ -110,7 +111,7 @@ export class oneMedia{
     profilpageMediaVideoCard() {
         let profilpageMediaVideoCardHTML = `
 
-            <article class="mediaCard">
+            <article class="mediaCard" data-title=${this.title} data-likes=${this.likes} data-date=${this.date} data-position="${this.position}">
                 <div class="mediaCard__video">
                     <div class="mediaCard__video-overlay"></div>
                     <video  controls preload="autoplay" class="mediaCard__video-video">
@@ -144,7 +145,7 @@ export class oneMedia{
     //---- PHOTOGRAPHER PAGE lightbox media-Photo Card
     profilpageLightboxPhotoCard(){
         let profilpageLightboxPhotoCardHTML = `
-        <figure id="lightbox__media-figure" tabindex="1">    
+        <figure id="lightbox__media-figure" tabindex="1" data-position="${this.position}">    
             <img class="slide" id="lightbox__media-image" src="${this.fullImage}" alt="${this.title}" aria-label="${this.title}"/>
             <figcaption id="lightbox__media-title" tabindex="1"> ${this.title}</figcaption>
         </figure>
@@ -156,7 +157,7 @@ export class oneMedia{
     //---- PHOTOGRAPHER PAGE lightbox media-Video Card
     profilpageLightboxVideoCard(){
         let profilpageLightboxVideoCardHTML = `
-        <figure id="lightbox__media-figure" tabindex="1"> 
+        <figure id="lightbox__media-figure" tabindex="1" data-position="${this.position}"> 
             <video class="slide" controls preload="auto" id="lightbox__media-video" aria-label="${this.title}">
                 <source type="video/webm" src="${this.fullVideo}"/>
                 <p>Votre navigateur est trop ancien pour lire cette vidéo</p>

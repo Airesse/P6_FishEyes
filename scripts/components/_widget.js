@@ -18,81 +18,32 @@ import {allDatas} from "../models/factories.js";
 //DISPLAY WIDGET 
 
 export let displayProfilpageWidget = async() => {
-  let dataOneMedia = null;
-// get datas   
+  
+//-----get datas   
+  let allArticles= document.querySelectorAll("article");
+  console.log ("allArticles="+allArticles); // object Node
 
-  const url = new URL(window.location.href); // pointage url
-  let id = url.searchParams.get("id"); // productId = url + id
+//-----insertion defaut option's title in widget
  
-  let profilpage = new allDatas();
-  let profilpageHtml = await profilpage.displayProfilpageDataPhotographer(id)
-  //-----insertion defaut option's title in widget
-  selected.innerHTML = "Popularité";
- 
+  //selected.innerHTML== popularity.innerHTML
 
 
-//-----function : display widget 
-  function widget() {
-    if (!listUl.getAttribute("style") || listUl.getAttribute("style") === "display: none;") {
-      listUl.style.display = "block";
-      arrow.classList.add("arrow-move");
-      widgetList.setAttribute("aria-expanded", "true");
-    } else {
-      listUl.style.display = "none";
-      widgetList.focus();
-      arrow.classList.remove("arrow-move");
-      widgetList.setAttribute("aria-expanded", "false");
-    }
-  }
-//-----EVENT : open widjet navigation on click
+
+  //-----EVENT : open widjet navigation on click
   widgetList.addEventListener("click", (e) => {
     e.preventDefault();
     widget();
   });
 
-//----Display only the selected option
-  const selectedChoiceHidden = () => {
-    if (selected.innerHTML == popularity.innerHTML) {
-      popularity.classList.remove("widget-listbox_option");
-      popularity.innerHTML = "";
-      popularity.removeAttribute("tabindex", "0");
-    } else {
-      popularity.innerHTML = "Popularité";
-      popularity.classList.add("widget-listbox_option");
-      popularity.setAttribute("tabindex", "0");
-    }
-    if (selected.innerHTML === date.innerHTML) {
-      date.classList.remove("widget-listbox_option");
-      date.innerHTML = "";
-      date.removeAttribute("tabindex", "0");
-    } else {
-      date.innerHTML = "Date";
-      date.classList.add("widget-listbox_option");
-      date.setAttribute("tabindex", "0");
-    }
-    if (selected.innerHTML === title.innerHTML) {
-      title.classList.remove("widget-listbox_option");
-      title.innerHTML = "";
-      title.removeAttribute("tabindex", "0");
-    } else {
-      title.innerHTML = "Titre";
-      title.classList.add("widget-listbox_option");
-      title.setAttribute("tabindex", "0");
-    }
-  };
+  //method 1 index of + select "option" of media +  transfrom object node list in array ([...])
+  //let article = e.target.parentNode
+  //option=[...article.parentNode.children].indexOf(article)
+
+  //method 2 : index each media
 
 
-//----Organize media photographer item by popularity (numbers of likes)
-  function sortByPopularity() {
-    selected.innerHTML = "Popularité";
-    selectedChoiceHidden();
-    this.dataOneMedia.sort((a, b) => b.likes - a.likes);
-    this.dataOneMedia.forEach((media) => {
-      const mediaCard = document.getElementById(media.id);
-      photographersPortfolio.appendChild(mediaCard);
-    });
-  }
-//----EVENTS :on click on option"popularity", organize media photographer by numbers of likes
+
+  //----EVENTS :on click on option"popularity", organize media photographer by numbers of likes
   popularity.addEventListener("click", () => {
     sortByPopularity();
   });
@@ -102,69 +53,152 @@ export let displayProfilpageWidget = async() => {
     if (e.key === "Enter") {
       sortByPopularity();
     }
-  });
+  }); 
 
-
-
-//----Organize media photographer item by date
-  function sortByDate() {
-    selected.innerHTML = "Date";
-    selectedChoiceHidden();
-    this.dataOneMedia.sort((a, b) => new Date(b.date) - new Date(a.date));
-    this.dataOneMedia.forEach((media) => {
-      const mediaCard = document.getElementById(media.id);
-      photographersPortfolio.appendChild(mediaCard);
-    });
-  }
 
   //----EVENTS :on click on option"date", organize media photographer by date
   date.addEventListener("click", () => {
     sortByDate();
   });
 
-  //-----EVENTS :when user press key"enter"with date option selected,organize media photographer by date
+//-----EVENTS :when user press key"enter"with date option selected,organize media photographer by date
   date.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       sortByDate();
     }
   });
 
-
-
-//----Organize media photographer item by media title
-  function sortByTitle() {
-    selected.innerHTML = "Titre";
-
-    selectedChoiceHidden();
-    function compare(a, b) {
-      if (a.title < b.title) {
-        return -1;
-      }
-      if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    }
-    this.dataOneMedia.sort(compare);
-
-    this.dataOneMedia.forEach((media) => {
-      const mediaCard = document.getElementById(media.id);
-      photographersPortfolio.appendChild(mediaCard);
-    });
-  }
-
-  //----EVENTS :on click on option"title", organize media photographer by media's title
+    //----EVENTS :on click on option"title", organize media photographer by media's title
   title.addEventListener("click", () => {
     sortByTitle();
   });
 
- //-----EVENTS :when user press key"enter"with title option selected,organize media photographer by media's titles
+  //-----EVENTS :when user press key"enter"with title option selected,organize media photographer by media's titles
   title.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       sortByTitle();
     }
   });
 
-  sortByLike();
+  widget();
   selectedChoiceHidden();
+  sortByPopularity();
+  sortByDate();
+  sortByTitle();
+
 }
+
+
+
+//-----function : display widget 
+export function widget() {
+  if (!listUl.getAttribute("style") || listUl.getAttribute("style") === "display: none;") {
+    listUl.style.display = "block";
+    arrow.classList.add("arrow-move");
+    widgetList.setAttribute("aria-expanded", "true");
+  } else {
+    listUl.style.display = "none";
+    widgetList.focus();
+    arrow.classList.remove("arrow-move");
+    widgetList.setAttribute("aria-expanded", "false");
+  }
+}
+
+
+//----function : Display only the selected option
+export const selectedChoiceHidden = () => {
+
+  if (selected.innerHTML == popularity.innerHTML) {
+    popularity.classList.remove("widget-listbox_option");
+    popularity.innerHTML = "";
+    popularity.removeAttribute("tabindex", "0");
+  } else {
+    popularity.innerHTML = "Popularité";
+    popularity.classList.add("widget-listbox_option");
+    popularity.setAttribute("tabindex", "0");
+  }
+
+  if (selected.innerHTML === date.innerHTML) {
+    date.classList.remove("widget-listbox_option");
+    date.innerHTML = "";
+    date.removeAttribute("tabindex", "0");
+  } else {
+    date.innerHTML = "Date";
+    date.classList.add("widget-listbox_option");
+    date.setAttribute("tabindex", "0");
+  }
+
+  if (selected.innerHTML === title.innerHTML) {
+    title.classList.remove("widget-listbox_option");
+    title.innerHTML = "";
+    title.removeAttribute("tabindex", "0");
+  } else {
+    title.innerHTML = "Titre";
+    title.classList.add("widget-listbox_option");
+    title.setAttribute("tabindex", "0");
+  }
+};
+
+
+//----function : Organize media photographer item by popularity (numbers of likes)
+export function sortByPopularity() {
+  let allArticles= document.querySelectorAll("article");
+  console.log ("allArticles="+allArticles);//object node list
+
+
+  
+  selected.innerHTML = "Popularité";
+  selectedChoiceHidden();
+  allArticles.sort((a, b) => b.likes - a.likes);
+  for (let media of allArticles){
+    const mediaCard = document.getElementById(media.id);
+    photographersPortfolio.appendChild(mediaCard);
+  };
+}
+
+
+
+
+//----Function : Organize media photographer item by date
+export function sortByDate() {
+  let allArticles= document.querySelectorAll("article");
+  console.log ("allArticlesa="+allArticles);
+
+  selected.innerHTML = "Date";
+  selectedChoiceHidden();
+  allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+  allArticles.forEach((media) => {
+    const mediaCard = document.getElementById(media.id);
+    photographersPortfolio.appendChild(mediaCard);
+  });
+}
+
+
+
+
+
+//----Function : Organize media photographer item by media title
+export function sortByTitle() {
+  let allArticles= document.querySelectorAll("article");
+  console.log ("allArticles="+allArticles);
+
+  selected.innerHTML = "Titre";
+
+  selectedChoiceHidden();
+  function compare(a, b) {
+    if (a.title < b.title) {
+      return -1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  }
+  allArticles.sort(compare);
+
+  allArticles.forEach((media) => {
+    const mediaCard = document.getElementById(media.id);
+    photographersPortfolio.appendChild(mediaCard);
+  });
+}
+

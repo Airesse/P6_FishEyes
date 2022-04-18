@@ -34,6 +34,8 @@
 .lightbox__button-previous{
     background: none;
     border: none;
+    
+    left: -30px;
 
     .fa-chevron-left{
         order: 1;
@@ -46,8 +48,8 @@
 .lightbox__button-next{
     background: none;
     border: none;
-    position: absolute;/*à verifier*/
-    right: -70px;
+   
+    right: -30px;
 
     .fa-chevron-right{
         order: 3;
@@ -57,10 +59,3 @@
     }
 }
 
-.lightbox__button-close{
-    background: none;
-    border: none;
-    position: absolute;
-    top: 60px;
-    right: -80px;
-}

@@ -1,36 +1,98 @@
 .modalLightbox{
-    @include element-center();
+    
     display: none;
+    @include element-center();
+    flex-direction: row;
     position: fixed;
     top: 0;
+    bottom: 0;
     left:0;
+    right: 0;
     background-color: white;
     width: 100%;
-    height: 100vh;
-    z-index: 5;/*à revoir*/
+    height: 100%;
+    z-index: 5;/*s'affiche au dessus de la page*/
+    overflow: hidden;
+    border: none;
 
     #lightbox{
         @include element-center();
+        
         position:relative;
-        column-gap: 30px;
+        flex-direction: row;
+        height: 100%;
+        width: 950%;
+
+        
+        #lightbox__button-close{
+            background: none;
+            border: none;
+            position: absolute;
+            color: $color-primary;
+            top: 10%;
+            right: 10%;
+            height: 70px; 
+            width: 70px;
+            font-size:xx-large; 
+            font-weight: 900;         
+        }
     }
 
 
     .lightbox__media{
-        width: 900px;
-        height: 800px;
-        margin-top: 63px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+       /* width: 100%;*/
+        /*height: 100%;*/
+        margin: 2%;
 
-        &#lighbox__media-figure{
-            height: 100%; 
+
+        .mediaCard__image{
+            display: flex;
             width: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-            /*box-shadow: $color-secondary-light 3px 3px 3px;/*à revoir les px*/
-          }
+            height: 100%;
+        }
+ 
 
+
+        .mediaCard__image-Photo, .mediaCard__video{
+            height: 900px; 
+            width: 750px;
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: 5px;
+            margin: 0 3%; 
+
+            video{
+                height: 900px;
+                width: 750px;
+                object-fit: cover;
+            }
+        }
+
+        .mediaCard__info{
+            display: flex;
+            justify-content: flex-start;
+            width: 750px;
+            
+            
+            h3{
+                font-size: xx-large;
+                margin-left: 3%;
+                margin-top: 1%;
+            }
+        
+            span{
+            display: none;
+            }
+        }
         /*buttons previous, next et close in components/ _button*/
     }
+
+
 
     .fa-chevron-left {
         font-size: 50px;

@@ -116,6 +116,7 @@ header {
 .lightbox__button-previous {
   background: none;
   border: none;
+  left: -30px;
 }
 
 .lightbox__button-previous .fa-chevron-left {
@@ -130,9 +131,7 @@ header {
 .lightbox__button-next {
   background: none;
   border: none;
-  position: absolute;
-  /*à verifier*/
-  right: -70px;
+  right: -30px;
 }
 
 .lightbox__button-next .fa-chevron-right {
@@ -142,14 +141,6 @@ header {
   font-size: 50px;
   cursor: pointer;
   color: #901C1C;
-}
-
-.lightbox__button-close {
-  background: none;
-  border: none;
-  position: absolute;
-  top: 60px;
-  right: -80px;
 }
 
 .close {
@@ -426,6 +417,7 @@ input[data-error]::after {
 }
 
 .modalLightbox {
+  display: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -439,15 +431,20 @@ input[data-error]::after {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  display: none;
+  -ms-flex-direction: row;
+      flex-direction: row;
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
   background-color: white;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 5;
-  /*à revoir*/
+  /*s'affiche au dessus de la page*/
+  overflow: hidden;
+  border: none;
 }
 
 .modalLightbox #lightbox {
@@ -465,24 +462,90 @@ input[data-error]::after {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  -webkit-column-gap: 30px;
-          column-gap: 30px;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  height: 100%;
+  width: 950%;
+}
+
+.modalLightbox #lightbox #lightbox__button-close {
+  background: none;
+  border: none;
+  position: absolute;
+  color: #901C1C;
+  top: 10%;
+  right: 10%;
+  height: 70px;
+  width: 70px;
+  font-size: xx-large;
+  font-weight: 900;
 }
 
 .modalLightbox .lightbox__media {
-  width: 900px;
-  height: 800px;
-  margin-top: 63px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* width: 100%;*/
+  /*height: 100%;*/
+  margin: 2%;
   /*buttons previous, next et close in components/ _button*/
 }
 
-.modalLightbox .lightbox__media#lighbox__media-figure {
-  height: 100%;
+.modalLightbox .lightbox__media .mediaCard__image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
+  height: 100%;
+}
+
+.modalLightbox .lightbox__media .mediaCard__image-Photo, .modalLightbox .lightbox__media .mediaCard__video {
+  height: 900px;
+  width: 750px;
   -o-object-fit: cover;
      object-fit: cover;
+  overflow: hidden;
   border-radius: 5px;
-  /*box-shadow: $color-secondary-light 3px 3px 3px;/*à revoir les px*/
+  margin: 0 3%;
+}
+
+.modalLightbox .lightbox__media .mediaCard__image-Photo video, .modalLightbox .lightbox__media .mediaCard__video video {
+  height: 900px;
+  width: 750px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.modalLightbox .lightbox__media .mediaCard__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 750px;
+}
+
+.modalLightbox .lightbox__media .mediaCard__info h3 {
+  font-size: xx-large;
+  margin-left: 3%;
+  margin-top: 1%;
+}
+
+.modalLightbox .lightbox__media .mediaCard__info span {
+  display: none;
 }
 
 .modalLightbox .fa-chevron-left {
@@ -659,11 +722,12 @@ input[data-error]::after {
 .widget-listbox {
   /*ui*/
   display: none;
-  z-index: 3;
+  /*z-index: 3;*/
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  height: 60px;
   /*padding: 3px 3px 10px 3px;*/
   border-radius: 5px;
   background-color: #901C1C;
@@ -671,7 +735,7 @@ input[data-error]::after {
 }
 
 .widget-listbox_option {
-  z-index: 4;
+  /*z-index: 4;*/
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -680,7 +744,8 @@ input[data-error]::after {
       -ms-flex-align: center;
           align-items: center;
   /*height: 70px;*/
-  /*padding: 3px 3px 10px 3px;*/
+  padding: 3px 3px 10px 3px;
+  border-bottom: 1px solid white;
   -webkit-transition: all .3s linear;
   transition: all .3s linear;
   text-align: left;
@@ -691,7 +756,7 @@ input[data-error]::after {
 
 .widget-listbox_option:before {
   position: absolute;
-  z-index: 5;
+  /*z-index: 5;*/
   top: 0;
   right: 5%;
   left: 5%;
