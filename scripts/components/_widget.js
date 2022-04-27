@@ -3,109 +3,151 @@ import {oneMedia} from "../models/constructors.js";
 import {allDatas} from "../models/factories.js";
 
 //DOM ELEMENT
+ 
+  const widgetBtn = document.querySelector("#widget-filter")//Btn
+  const widgetContainer= document.querySelector("#widget-container_textVisible");//div of btn
   const selected = document.querySelector("#optionSelected");//p
+  //console.log(selected.innerHTML);
+  const listLi = document.querySelectorAll(".widget-listbox_option");
+  const listUl = document.querySelector(".widget-listbox")
   const popularity = document.getElementById("widget-popularity");//li
+  //console.log(popularity.innerHTML);
   const date = document.getElementById("widget-date");//li
   const title = document.getElementById("widget-title");//li
-  const listUl = document.querySelector(".widget-listbox");//ui
-  const widgetList = document.querySelector("#widget");
+ 
+  const widgetList = document.querySelector("#widget");//label"trier par"
 
   const arrow = document.querySelector("#widget-container_arrow");
     
-  const photographersPortfolio = document.querySelectorAll(".mediaCard");// class de l'article
-
+  let photographersPortfolio = document.querySelectorAll(".mediaCard");// class de l'article
+  console.log(photographersPortfolio);//nodelist vide
+  let allArticles = null;
 
 //DISPLAY WIDGET 
 
 export let displayProfilpageWidget = async() => {
   
 //-----get datas   
-  let allArticles= document.querySelectorAll("article");
-  console.log ("allArticles="+allArticles); // object Node
+  allArticles= [...document.querySelectorAll("article")];// transform in array
+  console.log (allArticles); // object Node plein
 
-//-----insertion defaut option's title in widget
- 
-  //selected.innerHTML== popularity.innerHTML
-
-
-
-  //-----EVENT : open widjet navigation on click
-  widgetList.addEventListener("click", (e) => {
+  //-----EVENT : open widget navigation on click
+  widgetBtn.addEventListener("click", (e) => {
+    
     e.preventDefault();
-    widget();
+    widgetExpand();
   });
 
-  //method 1 index of + select "option" of media +  transfrom object node list in array ([...])
-  //let article = e.target.parentNode
-  //option=[...article.parentNode.children].indexOf(article)
 
-  //method 2 : index each media
+
 
 
 
   //----EVENTS :on click on option"popularity", organize media photographer by numbers of likes
-  popularity.addEventListener("click", () => {
-    sortByPopularity();
+  listLi.forEach(element => {
+
+    element.addEventListener("click", (e) => {
+      console.log("clock")
+      console.log(e.target.id);
+      if (e.target.id==="widget-popularity"){
+        console.log("if");
+        allArticles.sort(function(a, b){
+        return  b.dataset.likes - a.dataset.likes;
+  
+        });
+      }
+  
+      if (e.target.id==="widget-date"){
+        console.log("ifd");
+        allArticles.sort(function(a, b){
+        return  new Date(b.dataset.date) - new Date(a.dataset.date);
+  
+        });
+      }
+  
+  
+      if (e.target.id==="widget-title"){
+        console.log("ift");
+        allArticles.sort(function(a, b){
+        return  a.dataset.title.localeCompare(b.dataset.title);
+  
+        });
+      }
+      
+      else {
+        console.log(allArticles);
+        allArticles.sort(function(a, b) {
+        return  b.dataset.likes - a.dataset.likes;
+        });
+      
+      }
+  
+     
+    
+      /*allArticles.sort((a,b) =>{
+        switch (e.target.value){
+          case "Popularité" :
+            return a.dataset.likes.localCompare(b.dataset.likes);
+            break
+          
+          case "Date":
+            return a.dataset.date.localCompare(b.dataset.date);
+            break
+  
+          case "Titre":
+            return a.dataset.title.localCompare(b.dataset.title);
+            break
+  
+          default:
+            throw new Error ("Sort selection not defined")
+        }
+  
+      });*/
+  
+       // inject tri result in HTML
+    
+      console.log(allArticles);
+      console.log(allArticles.map(b => b.outerHTML));
+      photographersPortfolio.textContent= allArticles.map(b => b.outerHTML)
+      //outer pour avoir la balise html + contenu et garder mise en page
+  
+    });
+  
+    
   });
 
-//-----EVENTS :when user press key"enter"with popularity option selected,organize media photographer by numbers of likes
-  popularity.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      sortByPopularity();
-    }
-  }); 
 
-
-  //----EVENTS :on click on option"date", organize media photographer by date
-  date.addEventListener("click", () => {
-    sortByDate();
-  });
-
-//-----EVENTS :when user press key"enter"with date option selected,organize media photographer by date
-  date.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      sortByDate();
-    }
-  });
-
-    //----EVENTS :on click on option"title", organize media photographer by media's title
-  title.addEventListener("click", () => {
-    sortByTitle();
-  });
-
-  //-----EVENTS :when user press key"enter"with title option selected,organize media photographer by media's titles
-  title.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      sortByTitle();
-    }
-  });
-
-  widget();
-  selectedChoiceHidden();
-  sortByPopularity();
-  sortByDate();
-  sortByTitle();
 
 }
 
+//reste events au clavier à faire
 
+//-----function :display expand widget 
+export function widgetExpand() {
 
-//-----function : display widget 
-export function widget() {
   if (!listUl.getAttribute("style") || listUl.getAttribute("style") === "display: none;") {
-    listUl.style.display = "block";
+    
+    listUl.style.display = "flex";
     arrow.classList.add("arrow-move");
     widgetList.setAttribute("aria-expanded", "true");
+    widgetContainer.style.display = "none";
+    
+
   } else {
+   
     listUl.style.display = "none";
     widgetList.focus();
     arrow.classList.remove("arrow-move");
     widgetList.setAttribute("aria-expanded", "false");
+    widgetContainer.style.display = "flex";
+    
+    
   }
 }
 
 
-//----function : Display only the selected option
+//----function : Hide the selected option (li)
+// reste à metre le choix selectionné en position 1 ou juste position 1?
 export const selectedChoiceHidden = () => {
 
   if (selected.innerHTML == popularity.innerHTML) {
@@ -140,65 +182,4 @@ export const selectedChoiceHidden = () => {
 };
 
 
-//----function : Organize media photographer item by popularity (numbers of likes)
-export function sortByPopularity() {
-  let allArticles= document.querySelectorAll("article");
-  console.log ("allArticles="+allArticles);//object node list
-
-
-  
-  selected.innerHTML = "Popularité";
-  selectedChoiceHidden();
-  allArticles.sort((a, b) => b.likes - a.likes);
-  for (let media of allArticles){
-    const mediaCard = document.getElementById(media.id);
-    photographersPortfolio.appendChild(mediaCard);
-  };
-}
-
-
-
-
-//----Function : Organize media photographer item by date
-export function sortByDate() {
-  let allArticles= document.querySelectorAll("article");
-  console.log ("allArticlesa="+allArticles);
-
-  selected.innerHTML = "Date";
-  selectedChoiceHidden();
-  allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-  allArticles.forEach((media) => {
-    const mediaCard = document.getElementById(media.id);
-    photographersPortfolio.appendChild(mediaCard);
-  });
-}
-
-
-
-
-
-//----Function : Organize media photographer item by media title
-export function sortByTitle() {
-  let allArticles= document.querySelectorAll("article");
-  console.log ("allArticles="+allArticles);
-
-  selected.innerHTML = "Titre";
-
-  selectedChoiceHidden();
-  function compare(a, b) {
-    if (a.title < b.title) {
-      return -1;
-    }
-    if (a.title > b.title) {
-      return 1;
-    }
-    return 0;
-  }
-  allArticles.sort(compare);
-
-  allArticles.forEach((media) => {
-    const mediaCard = document.getElementById(media.id);
-    photographersPortfolio.appendChild(mediaCard);
-  });
-}
 

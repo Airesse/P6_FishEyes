@@ -52,7 +52,7 @@ let modalContactForm = document.querySelector(".modalContact-box"); //form eleme
 let modalCongrats = document.querySelector(".congrats"); // congrats element
 
 let photographerCardBtnContact = document.querySelector("#contact_button");//button "Contact me" on card photographer
-console.log ("contactbutton =" +photographerCardBtnContact)
+//console.log ("contactbutton =" +photographerCardBtnContact)
 let modalCloseX = document.querySelector(".close");//"icone" X on form
 let modalBtnGo = document.querySelector("#submit-form_button");//button "Envoyer" on form 
 let CongratsBtnClose = document.querySelector("#close-congrats_button");//button "Close" on Congrats
@@ -88,7 +88,7 @@ export function openModalContactForm(){
 export function openModalCongrats(){
     modalContactForm.style.display = "none";
     modalCongrats.style.display = "flex";
-    console.log ("openModalCongrats OK");
+    //console.log ("openModalCongrats OK");
 };
 
 
@@ -104,7 +104,9 @@ export function openModalCongrats(){
     //----------CONTACT modal : open/close
 
     modalCloseX.addEventListener("click", closeModalContact);   
-
+    modalCloseX.addEventListener("keydown", (e) =>{
+      if(e.key==="Enter"){closeModalContact();}
+    });
 
 
     //----------CONTACT FORM : actions to be taken when submitting the form
@@ -129,6 +131,13 @@ export function openModalCongrats(){
   //----Modal with Congrats: open/close
   
   modalBtnGo.addEventListener("click", openModalContact, openModalCongrats);
-  CongratsBtnClose.addEventListener("click", closeModalContact);
-  CongratsIconeX.addEventListener("click", closeModalContact);    
   
+  CongratsBtnClose.addEventListener("click", closeModalContact);
+  CongratsBtnClose.addEventListener("keydown", (e) =>{
+    if(e.key==="Enter"){closeModalContact();}
+  });
+
+  CongratsIconeX.addEventListener("click", closeModalContact);    
+  CongratsIconeX.addEventListener("keydown", (e) =>{
+    if(e.key==="Enter"){closeModalContact();}
+  });

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 /* COLORS */
 /*element position*/
 /*@import url("photographer.css");*/
@@ -465,16 +465,16 @@ input[data-error]::after {
   -ms-flex-direction: row;
       flex-direction: row;
   height: 100%;
-  width: 950%;
+  width: 95%;
 }
 
 .modalLightbox #lightbox #lightbox__button-close {
   background: none;
   border: none;
-  position: absolute;
+  position: fixed;
   color: #901C1C;
-  top: 10%;
-  right: 10%;
+  top: 13%;
+  right: 20%;
   height: 70px;
   width: 70px;
   font-size: xx-large;
@@ -512,7 +512,7 @@ input[data-error]::after {
 }
 
 .modalLightbox .lightbox__media .mediaCard__image-Photo, .modalLightbox .lightbox__media .mediaCard__video {
-  height: 900px;
+  height: 750px;
   width: 750px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -522,7 +522,7 @@ input[data-error]::after {
 }
 
 .modalLightbox .lightbox__media .mediaCard__image-Photo video, .modalLightbox .lightbox__media .mediaCard__video video {
-  height: 900px;
+  height: 750px;
   width: 750px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -564,6 +564,28 @@ input[data-error]::after {
   -webkit-box-ordinal-group: 4;
       -ms-flex-order: 3;
           order: 3;
+}
+
+/******* RESPONSIVE : SCREEN ADAPTATION******/
+@media (max-width: 1204px) {
+  #lightbox__button-close {
+    top: 14%;
+    right: 16%;
+  }
+}
+
+@media (max-width: 1064px) {
+  #lightbox__button-close {
+    top: 15%;
+    right: 10%;
+  }
+}
+
+@media (max-width: 886px) {
+  #lightbox__button-close {
+    top: 17%;
+    /*right:10%;*/
+  }
 }
 
 .boxLikes-bar {
@@ -627,7 +649,7 @@ input[data-error]::after {
 }
 
 #widget-filter {
-  /*la div*/
+  /*Btn*/
   position: absolute;
   margin-left: 90px;
   margin-top: -35px;
@@ -658,7 +680,7 @@ input[data-error]::after {
 }
 
 #widget-filter .widget-container {
-  /*label popularity*/
+  /*div (popularity + arrow)*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -687,16 +709,26 @@ input[data-error]::after {
 }
 
 #widget-filter .widget-container p {
+  /*text in widget*/
   font-size: 20px;
   font-weight: bold;
 }
 
 #widget-filter .widget-container #widget-container_arrow {
   font-size: 20px;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+#widget-filter .widget-container #widget-container_arrow.arrow-move {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 #widget-filter .widget-container:after {
-  z-index: 5;
+  /*z-index: 5;*/
   position: relative;
   display: block;
   width: 1rem;
@@ -726,9 +758,16 @@ input[data-error]::after {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
-  height: 60px;
-  /*padding: 3px 3px 10px 3px;*/
+  height: 135px;
+  padding: 0px 5px 10px 5px;
   border-radius: 5px;
   background-color: #901C1C;
   /*box-shadow: 1px 3px 8px 0px rgba(0,0,0,0.2);*/
@@ -743,25 +782,16 @@ input[data-error]::after {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  /*height: 70px;*/
-  padding: 3px 3px 10px 3px;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  padding-left: 10px;
   border-bottom: 1px solid white;
   -webkit-transition: all .3s linear;
   transition: all .3s linear;
   text-align: left;
   cursor: pointer;
   outline: none;
-  /*Text underline*/
-}
-
-.widget-listbox_option:before {
-  position: absolute;
-  /*z-index: 5;*/
-  top: 0;
-  right: 5%;
-  left: 5%;
-  display: block;
-  border-top: 1px solid white;
 }
 
 .widget-listbox_option:hover, .widget-listbox_option[aria-selected="true"] {
@@ -979,10 +1009,24 @@ header h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
   color: #901C1C;
   /*dislay grid a faire a la place*/
+}
+
+.mediaCard .mediaCard__Likes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 /*# sourceMappingURL=style.css.map */

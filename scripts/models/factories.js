@@ -65,10 +65,14 @@ export class allDatas extends API {
         this.dataOneMedia = await this.getDataMedia(id)
         //console.log(this.dataOneMedia);
         //---------- one Media (allmedia for one photographer) Instanciation
-        let position=-1; // no zero
+        
+        let  position = -1; // no zero
+        //console.log(position) Ok =-1
         let instanciationm = this.dataOneMedia.map (media => {
-            position ++
-            //console.log (instanciationm);
+          
+
+            position++
+            console.log (position); // =0 et pas à 1 en premier
             return new oneMedia(media, position)
         
         })
@@ -88,8 +92,9 @@ export class allDatas extends API {
        const totalLikes = this.dataOneMedia.reduce((a, b) => +a + +b.likes, 0)
        for(let item of instanciationm){
         likesbar += item.profilpagePhotographerLikesBar(totalLikes);
-        //console.log(likesbar);
-     };
+        console.log(likesbar);
+        
+        };
 
 
        //--------ProfilPage Composition = photographer header card + mediacard + likes-bar
@@ -101,71 +106,7 @@ export class allDatas extends API {
        
     }
 
-    async displayProfilpageAllDatasLightbox(id){
-        
-        //------MEDIA PART
-        this.dataLightbox = await this.getDataMedia(id);
-        //console.log("datalightbox"+this.dataLightbox);
-        //---------- one Media (allmedia for one photographer) Instanciation
-        let position = -1//no zero
-        let instanciationL = this.dataLightbox.map (media => {
-      
-            position ++
-           //console.log ("instanciationL"+instanciationL);
-            return new oneMedia(media, position);
-        })
 
-        //---------ProfilPage LIGHTBOX
-        /*let lightboxOneMediaHTML = "";
-        for(let item of instanciationL){
-        console.log("item"+item);
-        lightboxOneMediaHTML += item.profilpageLightboxCard();
-        console.log("lightOneMedia="+lightboxOneMediaHTML)
-        return lightboxOneMediaHTML
-        };*/
-
-        /*let lightboxAllMedias = document.querySelectorAll(".lightbox__media");
-        for(let item of instanciationL){
-        //console.log("item"+item);
-        lightboxAllMedias += item.profilpageLightboxCard();
-        console.log("lightboxAllMedias="+lightboxAllMedias)
-        
-        };
-
-        
-
-        return lightboxAllMediasHTML;*/
-
-    }
-
-
-    async displayProfilpageDataLightbox(id){
-        
-        //------MEDIA PART
-        this.dataLightbox = await this.getDataMedia(id);
-        //console.log("datalightbox"+this.dataLightbox);
-        //---------- one Media (allmedia for one photographer) Instanciation
-        let instanciationL = this.dataLightbox.map (media => new oneMedia(media));
-        //console.log ("instanciationL"+instanciationL);
-
-        //---------ProfilPage LIGHTBOX One media
-       /* let lightboxOneMediaHTML = "";
-        for(let item of instanciationL){
-        //console.log("item"+item);
-        lightboxOneMediaHTML += item.profilpageLightboxCard();
-        console.log("lightboxOneMediaHTML="+lightboxOneMediaHTML)
-        return lightboxOneMediaHTML
-        };*/
-
-
-        
-        
-
-        
-
-        return ;
-
-    }
 
 
 
@@ -177,7 +118,6 @@ export class allDatas extends API {
 
 
     
-
 
 
 

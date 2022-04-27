@@ -1,13 +1,13 @@
 ////// PROFIL PAGE
   
 import {API} from "../api/get.js";
-//import {homepagePhotographerCard, profilpagePhotographerCard, profilpageMediaPhotoCard,profilpageMediaVideoCard, profilpageMediaCard} from "../models/templatesHTML.js";
+
 import {onePhotographer, oneMedia} from "../models/constructors.js"
 import {allDatas} from "../models/factories.js";
 import { closeModalContact, openModalContact, openModalContactForm, startForm,} from "../modales/_modalContact.js";
 import { formDataValidation, showTextError, hideTextError } from "../components/_contactForm.js";
-import { startLightbox } from "../modales/_modalLightbox.js";
-import {displayProfilpageWidget,widget,sortByTitle,sortByPopularity,sortByDate } from "../components/_widget.js"
+import { startLightbox, closeLightbox } from "../modales/_modalLightbox.js";
+import {displayProfilpageWidget,widgetExpand, selectedChoiceHidden } from "../components/_widget.js"
 //import {init} from "./index.js"
 
 
@@ -21,27 +21,70 @@ const photographerSectionHeader = document.querySelector('.photographerCard') //
 export let start = async() => {
     //console.log ("start ok");
     
+    //----loading profilpage Datas and inject them in page html
     const url = new URL(window.location.href); // pointage url
     let id = url.searchParams.get("id"); // productId = url + id
-
     let profilpage = new allDatas();
     let profilpageHtml = await profilpage.displayProfilpageDataPhotographer(id)
     //console.log(profilpageHtml)
     photographerSectionHeader.innerHTML = profilpageHtml;
-
-     //----recuperate lightbox datas
-    let lightboxAllMediasHTML = await profilpage.displayProfilpageAllDatasLightbox(id);
-    console.log("lightboxAllMediasHTML=" +lightboxAllMediasHTML);
-    let lightboxOneMediaHTML = await profilpage.displayProfilpageDataLightbox(id)
-    console.log("lightboxOneMediaHTML="+lightboxOneMediaHTML)
-
-
-
-
     console.info('DOM loaded');
 
+
+    //----increment likes on click
+    let heartIcone = document.querySelectorAll(".fa-heart");
+    //console.log(heartIcone);
+    let numberLikes = document.querySelectorAll(".mediaCard__numberLikes")
+    //console.log(numberLikes); 
+    const totalLikes = document.querySelector(".totalLikes");
     
-    // ----FORM OPENNING
+
+    const LikeIncrementation = (element) => {
+      const numberLikes = element.previousSibling.previousSibling; //h3
+      const toggle = numberLikes.classList.toggle("heartIcone");
+
+      //console.log(numberLikes);
+      console.log(totalLikes);
+      
+      if (toggle) {
+        let number = parseInt(numberLikes.innerHTML)+1;
+        numberLikes.innerHTML = number ;
+        let total = parseInt(totalLikes.innerHTML)+1;
+        totalLikes.innerHTML = total ;
+        
+        element.style.color = "#db8876";
+        
+      } else {
+        let number = parseInt(numberLikes.innerHTML)-1;
+        numberLikes.innerHTML = number ;
+        let total = parseInt(totalLikes.innerHTML)-1;
+        totalLikes.innerHTML = total;
+        
+        element.style.color = "#901c1c";
+        
+      }
+    };
+    
+    heartIcone.forEach((element) => {
+      element.addEventListener("click", () => {
+        LikeIncrementation(element);
+      });
+    });
+  
+    heartIcone.forEach((element) => {
+      element.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          LikeIncrementation(element);
+        }
+      });
+    });
+    
+    
+
+
+
+    
+    // ----open FORM after click
     let photographerCardBtnContact = document.querySelector("#contact_button");
     //console.log(photographerCardBtnContact)
     photographerCardBtnContact.addEventListener("click", () => {
@@ -52,72 +95,33 @@ export let start = async() => {
     });
 
 
-    //----WIDGET filter
+    //----open WIDGET filter after click with option selected "popularity"
     let widgetFilterBtn = document.querySelector("#widget-filter");//button
+    let selected = document.querySelector("#optionSelected");//p
+    let popularity = document.getElementById("widget-popularity");//li
+    
+    selected.innerHTML = popularity.innerHTML
     
     widgetFilterBtn.addEventListener("click", () => {
       console.log("widgetstart ok")
       displayProfilpageWidget();
     });
 
-  //----LIGHTBOX OPENNING
-
-    const modalLightbox = document.querySelector(".modalLightbox")
-    console.log("modalLightbox="+modalLightbox)
-    //const lightbox = document.getElementById("lightbox");
-    const lightboxMediaCard = document.querySelector(".lightbox__media");
-    console.log("lightboxMediaCard"+lightboxMediaCard)
-    const lightboxAllMedias = document.querySelectorAll(".lightbox__media");
-    console.log("lightboxAllMedias="+lightboxAllMedias)
-
-
-    //----inject datas in page photographer.html
-
-    lightboxMediaCard.innerHTML += lightboxOneMediaHTML;
-    console.log("lightboxMediaCard="+lightboxMediaCard)
-    let lightboxMediaUnit = document.querySelector("#lightbox__media-figure")
-    console.log("lightboxMediaUnit="+lightboxMediaUnit)
-
-    
-    
-    //----lightbox behaviour
-    //--------open lightbox and fullsize media on click on media
-    
+    //----LIGHTBOX preload
     startLightbox()
+    closeLightbox()// lightbox ne s'affiche pas au chargement de la page (à ameliorer)
+  
 
-    /*for (let media of lightboxAllMedias) {
-        media.addEventListener("click", e => {
-            e.preventDefault();
-            
-            openLightbox();
-            currentSlide(0)
-            showSlide(slideIndex);
-        });
-    };*/
-
-    /*lightboxMediaUnit.addEventListener("click", e => {
-      console.log("click lightbox ok")
-      e.preventDefault();
-      startLightbox()
-      openLightbox();
-      currentSlide(0)
-      showSlide(slideIndex);
-    });*/
-
-
-    }
+  
+  }
 
 
 
 //Event : display page if DOM load finised
 if(document.readyState === 'loading' ) { //loading hasn't finished yet
   document.addEventListener("DOMContentLoad", start);
-  
-  //document.addEventListener("DOMContentLoad", startLightbox);
 }else{ // 'DOMContentLoad' has already fired
-  start();
-  
-  //startLightbox();
+  start(); 
 };
   
 

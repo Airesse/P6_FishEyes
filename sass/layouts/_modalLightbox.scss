@@ -21,22 +21,26 @@
         position:relative;
         flex-direction: row;
         height: 100%;
-        width: 950%;
+        width: 95%;
 
         
         #lightbox__button-close{
             background: none;
             border: none;
-            position: absolute;
+            position: fixed;
             color: $color-primary;
-            top: 10%;
-            right: 10%;
+            top: 13%;
+            right: 20%;
             height: 70px; 
             width: 70px;
             font-size:xx-large; 
-            font-weight: 900;         
+            font-weight: 900;
+            
+
+
         }
     }
+
 
 
     .lightbox__media{
@@ -59,7 +63,7 @@
 
 
         .mediaCard__image-Photo, .mediaCard__video{
-            height: 900px; 
+            height: 750px; 
             width: 750px;
             object-fit: cover;
             overflow: hidden;
@@ -67,7 +71,7 @@
             margin: 0 3%; 
 
             video{
-                height: 900px;
+                height: 750px;
                 width: 750px;
                 object-fit: cover;
             }
@@ -108,5 +112,31 @@
         order: 3;
       }
 
+}
+
+
+
+
+
+/******* RESPONSIVE : SCREEN ADAPTATION******/
+
+
+@media (max-width: 1204px) {
+    #lightbox__button-close{
+        top: 14%;
+        right:16%;
+    }
+}
+@media (max-width: 1064px) {
+    #lightbox__button-close{
+        top: 15%;
+        right:10%;
+    }
+}
+@media (max-width: 886px) {
+    #lightbox__button-close{
+        top: 17%;
+        /*right:10%;*/
+    }
 }
 

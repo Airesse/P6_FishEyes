@@ -59,6 +59,7 @@
     .mediaCard__info{
         width: 270px;
         display: flex;
+        flex-wrap: nowrap;
         justify-content: space-between;
         color: $color-primary;
         /*dislay grid a faire a la place*/
@@ -67,7 +68,11 @@
     
     }
 
-
+    .mediaCard__Likes{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
 
 }
 
