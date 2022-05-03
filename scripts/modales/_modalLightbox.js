@@ -21,7 +21,7 @@ let slideIndex = 0;
 export function openLightbox(e) {
     //console.log("openlightbox ok")
     modalLightbox.style.display= "flex";
-    //window.scrollTo(0.0);
+    
     document.body.classList.add("no-scroll");
     
 

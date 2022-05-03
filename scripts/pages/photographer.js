@@ -22,13 +22,18 @@ export let start = async() => {
     //console.log ("start ok");
     
     //----loading profilpage Datas and inject them in page html
-    const url = new URL(window.location.href); // pointage url
+    let url = new URL(window.location.href); // pointage url
     let id = url.searchParams.get("id"); // productId = url + id
+    
+
     let profilpage = new allDatas();
     let profilpageHtml = await profilpage.displayProfilpageDataPhotographer(id)
-    //console.log(profilpageHtml)
+    console.log(profilpageHtml)  
     photographerSectionHeader.innerHTML = profilpageHtml;
     console.info('DOM loaded');
+
+
+
 
 
     //----increment likes on click
@@ -37,13 +42,13 @@ export let start = async() => {
     let numberLikes = document.querySelectorAll(".mediaCard__numberLikes")
     //console.log(numberLikes); 
     const totalLikes = document.querySelector(".totalLikes");
-    
+
 
     const LikeIncrementation = (element) => {
       const numberLikes = element.previousSibling.previousSibling; //h3
       const toggle = numberLikes.classList.toggle("heartIcone");
 
-      //console.log(numberLikes);
+      console.log(numberLikes);
       console.log(totalLikes);
       
       if (toggle) {
@@ -52,7 +57,7 @@ export let start = async() => {
         let total = parseInt(totalLikes.innerHTML)+1;
         totalLikes.innerHTML = total ;
         
-        element.style.color = "#db8876";
+        element.style.color = "#DB8876";
         
       } else {
         let number = parseInt(numberLikes.innerHTML)-1;
@@ -60,7 +65,7 @@ export let start = async() => {
         let total = parseInt(totalLikes.innerHTML)-1;
         totalLikes.innerHTML = total;
         
-        element.style.color = "#901c1c";
+        element.style.color = "#901C1C";
         
       }
     };
@@ -81,18 +86,8 @@ export let start = async() => {
     
     
 
+  
 
-
-    
-    // ----open FORM after click
-    let photographerCardBtnContact = document.querySelector("#contact_button");
-    //console.log(photographerCardBtnContact)
-    photographerCardBtnContact.addEventListener("click", () => {
-      //console.log("clic");
-      openModalContact();
-      openModalContactForm();
-      startForm();
-    });
 
 
     //----open WIDGET filter after click with option selected "popularity"
@@ -107,10 +102,29 @@ export let start = async() => {
       displayProfilpageWidget();
     });
 
+
+
+
+
     //----LIGHTBOX preload
     startLightbox()
     closeLightbox()// lightbox ne s'affiche pas au chargement de la page (à ameliorer)
   
+
+
+
+   
+
+        
+    // ----open FORM after click
+    let photographerCardBtnContact = document.querySelector("#contact_button");
+    //console.log(photographerCardBtnContact)
+    photographerCardBtnContact.addEventListener("click", () => {
+      //console.log("clic");
+      openModalContact();
+      openModalContactForm();
+      startForm();
+    });
 
   
   }

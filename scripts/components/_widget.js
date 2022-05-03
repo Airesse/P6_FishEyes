@@ -108,7 +108,7 @@ export let displayProfilpageWidget = async() => {
     
       console.log(allArticles);
       console.log(allArticles.map(b => b.outerHTML));
-      photographersPortfolio.textContent= allArticles.map(b => b.outerHTML)
+      photographersPortfolio.innerHTML= allArticles.map(b => b.outerHTML)
       //outer pour avoir la balise html + contenu et garder mise en page
   
     });

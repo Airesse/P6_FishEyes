@@ -72,7 +72,7 @@ export class allDatas extends API {
           
 
             position++
-            console.log (position); // =0 et pas à 1 en premier
+            //console.log (position); // =0 et pas à 1 en premier
             return new oneMedia(media, position)
         
         })
@@ -89,13 +89,28 @@ export class allDatas extends API {
        //---------ProfilPage likesbar = photographer numbers of likes + price
  
        let likesbar= "";
-       const totalLikes = this.dataOneMedia.reduce((a, b) => +a + +b.likes, 0)
-       for(let item of instanciationm){
+       
+       const totalLikes = this.dataOneMedia.reduce((a, b) => +a + +b.likes, 0);
+       console.log("totalLikes"+totalLikes); // just tot likes in number-no bar
+
+       ///premiere version de la factory
+       /*for(let item of instanciationm){
         likesbar += item.profilpagePhotographerLikesBar(totalLikes);
         console.log(likesbar);
-        
-        };
+        };*/
 
+
+        let price = this.dataOnePhotographer.price;
+        console.log("photographer price :"+price);// ok just number
+
+
+
+        let instanciationL = new oneMedia(this.dataOneMedia)
+        console.log(instanciationL);
+        likesbar = instanciationL.profilpagePhotographerLikesBar(totalLikes);
+        console.log(likesbar);//ok pour likes mais pas le price
+        
+        
 
        //--------ProfilPage Composition = photographer header card + mediacard + likes-bar
        let profilpageComposition = photographerCardComposition + mediaCardComposition + likesbar;

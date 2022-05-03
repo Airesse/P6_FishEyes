@@ -184,11 +184,11 @@ export class oneMedia{
         let profilpagePhotographerLikesBarHTML = `
         <div class=boxLikes-bar>
             <div class="likes-bar">
-                <p class="totalLikes">${totalLikes}</p>
+                <p class="totalLikes" id="totalLikes">${totalLikes}</p>
                 <div class="fas fa-heart full"></div>
             </div>
             <div class="price-bar">
-                <p class="price">${this.price}&euro; / jour</p>
+                <p id="price-bar">${this.price}&euro; / jour</p>
             </div>
         </div>
         `;
