@@ -61,7 +61,7 @@ export let startLightbox = () => {
     
     //--------open lightbox and fullsize media after click on media
     lightboxAllMedias = document.querySelectorAll(".mediaCard__image");
-    console.log(lightboxAllMedias);
+    //console.log(lightboxAllMedias);
     
     for (let media of lightboxAllMedias) {
         media.addEventListener("click", e => {

@@ -30,7 +30,7 @@ export function formDataValidation(){
             validationData-- ;
         } else {
             hideTextError(firstName);
-            console.log("Prénom :" +firstName.value);
+            //console.log("Prénom :" +firstName.value);
         }
      
 
@@ -41,7 +41,7 @@ export function formDataValidation(){
             validationData-- ;
         } else {
             hideTextError(lastName);
-            console.log("Nom :" +lastName.value);
+            //console.log("Nom :" +lastName.value);
         } 
     
 
@@ -52,7 +52,7 @@ export function formDataValidation(){
             validationData-- ;
         } else {
             hideTextError(email);
-            console.log("email :" +email.value);
+            //console.log("email :" +email.value);
         } 
     
 
@@ -61,7 +61,7 @@ export function formDataValidation(){
     
         if (message.value.trim().match(regexNumberOfCharacters)){
             hideTextError(message);
-            console.log("message :" +message.value);                              
+            //console.log("message :" +message.value);                              
         } else {
             showTextError(message);
             validationData-- ;        

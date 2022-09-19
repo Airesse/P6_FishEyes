@@ -61,7 +61,7 @@ export class onePhotographer{
 
 
 //PHOTOGRAPH PAGE : Create objet "Media spécifique d'un photographe"
-export class oneMedia{
+export class oneMedia {
 
     constructor(data, position){
         this.id = data.id;
@@ -75,6 +75,7 @@ export class oneMedia{
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
+        //console.log(this.price);//prix pour 1 photo? mis pas la journée
         this.position = position;
 
         this.listmedias = data; // get a list for lightbox's navigation
@@ -180,7 +181,7 @@ export class oneMedia{
 
 
     // ----PHOTOGRAPHER PAGE likes bar
-    profilpagePhotographerLikesBar(totalLikes){
+    profilpagePhotographerLikesBar(totalLikes, price){
         let profilpagePhotographerLikesBarHTML = `
         <div class=boxLikes-bar>
             <div class="likes-bar">
@@ -188,7 +189,7 @@ export class oneMedia{
                 <div class="fas fa-heart full"></div>
             </div>
             <div class="price-bar">
-                <p id="price-bar">${this.price}&euro; / jour</p>
+                <p id="price-bar">${price}&euro; / jour</p>
             </div>
         </div>
         `;

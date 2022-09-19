@@ -1,7 +1,6 @@
-
+@charset "UTF-8";
 /* COLORS */
 /*element position*/
-/*@import url("photographer.css");*/
 /*Reset CSS*/
 * {
   -webkit-box-sizing: border-box;
@@ -989,6 +988,19 @@ header h1 {
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+#mediaCards {
+  margin: 0 100px 0 100px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
 }
 
 .mediaCard {

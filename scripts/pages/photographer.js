@@ -7,14 +7,16 @@ import {allDatas} from "../models/factories.js";
 import { closeModalContact, openModalContact, openModalContactForm, startForm,} from "../modales/_modalContact.js";
 import { formDataValidation, showTextError, hideTextError } from "../components/_contactForm.js";
 import { startLightbox, closeLightbox } from "../modales/_modalLightbox.js";
-import {displayProfilpageWidget,widgetExpand, selectedChoiceHidden } from "../components/_widget.js"
+import {organizedMediasBySelection,widgetExpand, selectedChoiceHidden } from "../components/_widget.js"
 //import {init} from "./index.js"
 
 
 //DOM elements
 
-const photographerSectionHeader = document.querySelector('.photographerCard') //profilpage
-
+const photographerSection = document.querySelector('.photographerCard') //profilpage
+console.log(photographerSection);
+const photographerSectionMedias = document.querySelector("#mediaCards");
+console.log(photographerSectionMedias);
 
 //Functions
 //----Asynchrone initialisation (wait to get all datas before displays them)
@@ -28,8 +30,8 @@ export let start = async() => {
 
     let profilpage = new allDatas();
     let profilpageHtml = await profilpage.displayProfilpageDataPhotographer(id)
-    console.log(profilpageHtml)  
-    photographerSectionHeader.innerHTML = profilpageHtml;
+    //console.log(profilpageHtml)  
+    photographerSection.innerHTML = profilpageHtml;
     console.info('DOM loaded');
 
 
@@ -48,8 +50,8 @@ export let start = async() => {
       const numberLikes = element.previousSibling.previousSibling; //h3
       const toggle = numberLikes.classList.toggle("heartIcone");
 
-      console.log(numberLikes);
-      console.log(totalLikes);
+      //console.log(numberLikes);
+      //console.log(totalLikes);
       
       if (toggle) {
         let number = parseInt(numberLikes.innerHTML)+1;
@@ -94,12 +96,20 @@ export let start = async() => {
     let widgetFilterBtn = document.querySelector("#widget-filter");//button
     let selected = document.querySelector("#optionSelected");//p
     let popularity = document.getElementById("widget-popularity");//li
-    
+    let allArticles= [...document.querySelectorAll("article")];
+
     selected.innerHTML = popularity.innerHTML
+    allArticles.sort(function(a, b){
+      return  b.dataset.likes - a.dataset.likes;
+      })
     
-    widgetFilterBtn.addEventListener("click", () => {
+    photographerSectionMedias.innerHTML= allArticles.map(b => b.outerHTML)
+    
+    widgetFilterBtn.addEventListener("click", (e) => {
       console.log("widgetstart ok")
-      displayProfilpageWidget();
+      e.preventDefault();
+      widgetExpand();
+      organizedMediasBySelection();
     });
 
 

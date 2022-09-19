@@ -7,8 +7,9 @@ import {allDatas} from "../models/factories.js";
   const widgetBtn = document.querySelector("#widget-filter")//Btn
   const widgetContainer= document.querySelector("#widget-container_textVisible");//div of btn
   const selected = document.querySelector("#optionSelected");//p
-  //console.log(selected.innerHTML);
+  //console.log(selected);
   const listLi = document.querySelectorAll(".widget-listbox_option");
+  //console.log(listLi);
   const listUl = document.querySelector(".widget-listbox")
   const popularity = document.getElementById("widget-popularity");//li
   //console.log(popularity.innerHTML);
@@ -19,38 +20,29 @@ import {allDatas} from "../models/factories.js";
 
   const arrow = document.querySelector("#widget-container_arrow");
     
-  let photographersPortfolio = document.querySelectorAll(".mediaCard");// class de l'article
-  console.log(photographersPortfolio);//nodelist vide
+  
   let allArticles = null;
 
 //DISPLAY WIDGET 
 
-export let displayProfilpageWidget = async() => {
+export let organizedMediasBySelection = async() => {
   
 //-----get datas   
   allArticles= [...document.querySelectorAll("article")];// transform in array
   console.log (allArticles); // object Node plein
-
-  //-----EVENT : open widget navigation on click
-  widgetBtn.addEventListener("click", (e) => {
-    
-    e.preventDefault();
-    widgetExpand();
-  });
-
-
-
-
 
 
   //----EVENTS :on click on option"popularity", organize media photographer by numbers of likes
   listLi.forEach(element => {
 
     element.addEventListener("click", (e) => {
-      console.log("clock")
-      console.log(e.target.id);
+      //console.log("click")
+      //console.log(e.target.id);
+      //console.log(e.target.innerHTML);
       if (e.target.id==="widget-popularity"){
-        console.log("if");
+        console.log("click on popularity");
+        selected.innerHTML=e.target.innerHTML;
+
         allArticles.sort(function(a, b){
         return  b.dataset.likes - a.dataset.likes;
   
@@ -58,7 +50,8 @@ export let displayProfilpageWidget = async() => {
       }
   
       if (e.target.id==="widget-date"){
-        console.log("ifd");
+        console.log("click on date");
+        selected.innerHTML=e.target.innerHTML
         allArticles.sort(function(a, b){
         return  new Date(b.dataset.date) - new Date(a.dataset.date);
   
@@ -67,7 +60,8 @@ export let displayProfilpageWidget = async() => {
   
   
       if (e.target.id==="widget-title"){
-        console.log("ift");
+        console.log("click title");
+        selected.innerHTML=e.target.innerHTML
         allArticles.sort(function(a, b){
         return  a.dataset.title.localeCompare(b.dataset.title);
   
@@ -106,9 +100,10 @@ export let displayProfilpageWidget = async() => {
   
        // inject tri result in HTML
     
-      console.log(allArticles);
-      console.log(allArticles.map(b => b.outerHTML));
-      photographersPortfolio.innerHTML= allArticles.map(b => b.outerHTML)
+      console.log(allArticles);//ok trié
+      //console.log(allArticles.map(b => b.outerHTML));
+      const photographerSectionMedias = document.querySelector("#mediaCards");
+      photographerSectionMedias.innerHTML= allArticles.map(b => b.outerHTML)
       //outer pour avoir la balise html + contenu et garder mise en page
   
     });
@@ -123,7 +118,7 @@ export let displayProfilpageWidget = async() => {
 //reste events au clavier à faire
 
 //-----function :display expand widget 
-export function widgetExpand() {
+export function widgetExpand(e) {
 
   if (!listUl.getAttribute("style") || listUl.getAttribute("style") === "display: none;") {
     
@@ -180,6 +175,8 @@ export const selectedChoiceHidden = () => {
     title.setAttribute("tabindex", "0");
   }
 };
+
+
 
 
 

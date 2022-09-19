@@ -82,38 +82,34 @@ export class allDatas extends API {
            mediaCardComposition += item.profilpageMediaCard();
            //console.log (mediaCardComposition);
        }
-
+       const photographerSectionMedias = document.querySelector("#mediaCards");
+       photographerSectionMedias.innerHTML = mediaCardComposition;
 
 
 
        //---------ProfilPage likesbar = photographer numbers of likes + price
  
-       let likesbar= "";
+       
        
        const totalLikes = this.dataOneMedia.reduce((a, b) => +a + +b.likes, 0);
-       console.log("totalLikes"+totalLikes); // just tot likes in number-no bar
-
-       ///premiere version de la factory
-       /*for(let item of instanciationm){
-        likesbar += item.profilpagePhotographerLikesBar(totalLikes);
-        console.log(likesbar);
-        };*/
+       //console.log("totalLikes"+totalLikes); // just tot likes in number-no bar
 
 
         let price = this.dataOnePhotographer.price;
-        console.log("photographer price :"+price);// ok just number
+        //console.log("photographer price :"+price);// ok just number
 
 
 
         let instanciationL = new oneMedia(this.dataOneMedia)
-        console.log(instanciationL);
-        likesbar = instanciationL.profilpagePhotographerLikesBar(totalLikes);
-        console.log(likesbar);//ok pour likes mais pas le price
+        //console.log(instanciationL);
+        let likesbar= "";
+        likesbar = instanciationL.profilpagePhotographerLikesBar(totalLikes,price);
+        //console.log(likesbar);//ok 
         
         
 
        //--------ProfilPage Composition = photographer header card + mediacard + likes-bar
-       let profilpageComposition = photographerCardComposition + mediaCardComposition + likesbar;
+       let profilpageComposition = photographerCardComposition /*+ mediaCardComposition*/ + likesbar;
 
 
        return profilpageComposition;
