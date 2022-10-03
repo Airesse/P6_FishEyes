@@ -14,9 +14,9 @@ import {organizedMediasBySelection,widgetExpand, selectedChoiceHidden } from "..
 //DOM elements
 
 const photographerSection = document.querySelector('.photographerCard') //profilpage
-console.log(photographerSection);
+//console.log(photographerSection);
 const photographerSectionMedias = document.querySelector("#mediaCards");
-console.log(photographerSectionMedias);
+//console.log(photographerSectionMedias);
 
 //Functions
 //----Asynchrone initialisation (wait to get all datas before displays them)
@@ -32,24 +32,55 @@ export let start = async() => {
     let profilpageHtml = await profilpage.displayProfilpageDataPhotographer(id)
     //console.log(profilpageHtml)  
     photographerSection.innerHTML = profilpageHtml;
-    console.info('DOM loaded');
+    //console.info('DOM loaded');
 
+    
+    
+
+  
+
+
+
+    //----open WIDGET filter after click with option selected "popularity"
+    let widgetFilterBtn = document.querySelector("#widget-filter");//button
+    let selected = document.querySelector("#optionSelected");//p
+    let popularity = document.getElementById("widget-popularity");//li
+    let allArticles= [...document.querySelectorAll("article")];
+
+    selected.innerHTML = popularity.innerHTML
+    allArticles.sort(function(a, b){
+      return  b.dataset.likes - a.dataset.likes;
+      })
+    
+    photographerSectionMedias.innerHTML= allArticles.map(b => b.outerHTML).join('');
+    
+    widgetFilterBtn.addEventListener("click", (e) => {
+      //console.log("widgetstart ok")
+      e.preventDefault();
+      widgetExpand();
+      organizedMediasBySelection();
+    });
+
+
+    
 
 
 
 
     //----increment likes on click
     let heartIcone = document.querySelectorAll(".fa-heart");
-    //console.log(heartIcone);
+    console.log(heartIcone);
     let numberLikes = document.querySelectorAll(".mediaCard__numberLikes")
-    //console.log(numberLikes); 
+    console.log(numberLikes); 
     const totalLikes = document.querySelector(".totalLikes");
 
 
     const LikeIncrementation = (element) => {
-      const numberLikes = element.previousSibling.previousSibling; //h3
+      const numberLikes = element.previousElementSibling; //h3
+      console.log(numberLikes);
       const toggle = numberLikes.classList.toggle("heartIcone");
 
+      console.log(toggle);//pb avec video
       //console.log(numberLikes);
       //console.log(totalLikes);
       
@@ -85,39 +116,17 @@ export let start = async() => {
         }
       });
     });
-    
-    
-
-  
-
-
-
-    //----open WIDGET filter after click with option selected "popularity"
-    let widgetFilterBtn = document.querySelector("#widget-filter");//button
-    let selected = document.querySelector("#optionSelected");//p
-    let popularity = document.getElementById("widget-popularity");//li
-    let allArticles= [...document.querySelectorAll("article")];
-
-    selected.innerHTML = popularity.innerHTML
-    allArticles.sort(function(a, b){
-      return  b.dataset.likes - a.dataset.likes;
-      })
-    
-    photographerSectionMedias.innerHTML= allArticles.map(b => b.outerHTML)
-    
-    widgetFilterBtn.addEventListener("click", (e) => {
-      console.log("widgetstart ok")
-      e.preventDefault();
-      widgetExpand();
-      organizedMediasBySelection();
-    });
-
-
 
 
 
     //----LIGHTBOX preload
-    startLightbox()
+    startLightbox()//css pr cacher
+    /*const btnClose = document.querySelector("#lightbox__button-close");
+    const btnPrevious= document.querySelector(".lightbox__button-previous");
+    const btnNext = document.querySelector(".lightbox__button-next");
+    btnClose.style.opacity = 0;
+    btnNext.style.display = 0;
+    btnPrevious.style.display = 0;*/
     closeLightbox()// lightbox ne s'affiche pas au chargement de la page (à ameliorer)
   
 

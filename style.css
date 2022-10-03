@@ -186,6 +186,7 @@ form {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  overflow: scroll;
 }
 
 form div {
@@ -936,6 +937,7 @@ header h1 {
 
 #main {
   display: block;
+  width: 100%;
 }
 
 #photographer-section {
@@ -949,6 +951,7 @@ header h1 {
           justify-content: space-between;
   /*gap: 70px;*/
   margin: 50px 100px 50px 100px;
+  width: 100%;
 }
 
 #photographerHeader {
@@ -961,7 +964,7 @@ header h1 {
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
+  gap: 60px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -992,6 +995,7 @@ header h1 {
 
 #mediaCards {
   margin: 0 100px 0 100px;
+  width: 100%;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
@@ -1008,8 +1012,8 @@ header h1 {
 }
 
 .mediaCard .mediaCard__image-Photo, .mediaCard .mediaCard__video-video {
-  height: 270px;
-  width: 270px;
+  height: 230px;
+  width: 230px;
   border-radius: 5px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -1017,7 +1021,7 @@ header h1 {
 }
 
 .mediaCard .mediaCard__info {
-  width: 270px;
+  width: 230px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

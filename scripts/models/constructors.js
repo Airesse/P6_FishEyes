@@ -123,9 +123,9 @@ export class oneMedia {
                 
                 <div class="mediaCard__info">
                     <h3 class="mediaCard__title">${this.title}</h3>
-                    <span class="mediaCard__Likes>
+                    <span class="mediaCard__Likes">
                         <h3 class="mediaCard__numberLikes">${this.likes}</h3>
-                        <i class="fas fa-heart full" aria-label="likes"id="heart" ></i>
+                        <i class="fas fa-heart full" aria-label="likes" id="heart"></i>
                     </span>
                 </div>               
             </article>`;

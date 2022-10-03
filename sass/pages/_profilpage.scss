@@ -4,6 +4,7 @@
 
 #main{
     display: block;
+    width: 100%;
 }
 
 #photographer-section {
@@ -12,6 +13,7 @@
     justify-content: space-between;
     /*gap: 70px;*/
     margin: 50px 100px 50px 100px;
+    width: 100%;
    
 
 }
@@ -23,7 +25,7 @@
     margin-bottom: 85px;/*à revoir comme titrepage*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
+    gap: 60px;
     align-items: center;
     justify-items: center;
     
@@ -46,6 +48,7 @@
 
 #mediaCards{
     margin: 0 100px 0 100px;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
@@ -58,15 +61,15 @@
     margin: 35px 35px 35px 0;
 
     .mediaCard__image-Photo, .mediaCard__video-video{
-        height: 270px;
-        width: 270px;
+        height: 230px;
+        width: 230px;
         border-radius: 5px;
         object-fit: cover;
         padding-bottom: 5px; 
     }
 
     .mediaCard__info{
-        width: 270px;
+        width: 230px;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;

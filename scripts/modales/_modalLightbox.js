@@ -5,7 +5,7 @@ import {onePhotographer, oneMedia} from "../models/constructors.js"
 
 
 //DOM ELEMENTS
-const modalLightbox = document.querySelector(".modalLightbox")
+const modalLightbox = document.querySelector(".modalLightbox");
 const lightboxMedias = document.querySelector(".lightbox__media");
 
 const btnClose = document.querySelector("#lightbox__button-close");
@@ -40,6 +40,8 @@ export function openLightbox(e) {
 export function closeLightbox() {
     modalLightbox.style.display = "none";
     document.body.classList.remove("no-scroll");
+
+
     //console.log("closelightbox ok")
 }
 
@@ -58,12 +60,13 @@ export let startLightbox = () => {
     //console.log("startLightbox OK")
 
     //----lightbox behaviour
-    
+
     //--------open lightbox and fullsize media after click on media
     lightboxAllMedias = document.querySelectorAll(".mediaCard__image");
     //console.log(lightboxAllMedias);
     
     for (let media of lightboxAllMedias) {
+
         media.addEventListener("click", e => {
             e.preventDefault();
             //console.log("click")

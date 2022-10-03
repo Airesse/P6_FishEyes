@@ -29,7 +29,7 @@ export let organizedMediasBySelection = async() => {
   
 //-----get datas   
   allArticles= [...document.querySelectorAll("article")];// transform in array
-  console.log (allArticles); // object Node plein
+  //console.log (allArticles); // object Node plein
 
 
   //----EVENTS :on click on option"popularity", organize media photographer by numbers of likes
@@ -40,7 +40,7 @@ export let organizedMediasBySelection = async() => {
       //console.log(e.target.id);
       //console.log(e.target.innerHTML);
       if (e.target.id==="widget-popularity"){
-        console.log("click on popularity");
+        //console.log("click on popularity");
         selected.innerHTML=e.target.innerHTML;
 
         allArticles.sort(function(a, b){
@@ -50,7 +50,7 @@ export let organizedMediasBySelection = async() => {
       }
   
       if (e.target.id==="widget-date"){
-        console.log("click on date");
+        //console.log("click on date");
         selected.innerHTML=e.target.innerHTML
         allArticles.sort(function(a, b){
         return  new Date(b.dataset.date) - new Date(a.dataset.date);
@@ -60,7 +60,7 @@ export let organizedMediasBySelection = async() => {
   
   
       if (e.target.id==="widget-title"){
-        console.log("click title");
+        //console.log("click title");
         selected.innerHTML=e.target.innerHTML
         allArticles.sort(function(a, b){
         return  a.dataset.title.localeCompare(b.dataset.title);
@@ -69,7 +69,7 @@ export let organizedMediasBySelection = async() => {
       }
       
       else {
-        console.log(allArticles);
+        //console.log(allArticles);
         allArticles.sort(function(a, b) {
         return  b.dataset.likes - a.dataset.likes;
         });
@@ -103,7 +103,7 @@ export let organizedMediasBySelection = async() => {
       console.log(allArticles);//ok trié
       //console.log(allArticles.map(b => b.outerHTML));
       const photographerSectionMedias = document.querySelector("#mediaCards");
-      photographerSectionMedias.innerHTML= allArticles.map(b => b.outerHTML)
+      photographerSectionMedias.innerHTML= allArticles.map(b => b.outerHTML).join('');
       //outer pour avoir la balise html + contenu et garder mise en page
   
     });
