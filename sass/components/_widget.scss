@@ -5,7 +5,7 @@
     position: absolute;
     top: 480px;
     margin-left: 100px;
-    width: 100%;
+    /*width: 100%;*/
     height: 45px;
     opacity: 1;
     
@@ -76,8 +76,7 @@
             transition: transform 0.3s ease-in-out;
 
             &.arrow-move{
-                transform: rotate(180deg); 
-                
+                transform: rotate(180deg);                 
             }
 
         }
@@ -122,21 +121,21 @@
 
     width: 100%;
     height: 135px;
-    padding: 0px 5px 10px 5px;
+    /*padding: 0px 5px 10px 5px;*/
     border-radius: 5px;
     background-color: $color-primary;
     /*box-shadow: 1px 3px 8px 0px rgba(0,0,0,0.2);*/
 
     &_option {
-        /*z-index: 4;*/
+        z-index: 4;
         position: relative;
-        
+        border-radius: 5px;
         display: flex;
         align-items: center;
         width: 100%;
         height: 100%;
         font-size: 20px;
-        padding-left: 10px;
+        padding-left: 15px;
         border-bottom: 1px solid white;
 
         transition: all .3s linear;

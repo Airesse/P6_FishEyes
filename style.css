@@ -154,21 +154,22 @@ header {
           transform: scale(0.7);
 }
 
-.close:before, .close:after {
+.close::before, .close::after {
   position: absolute;
   left: 15px;
-  content: " ";
+  /*display: "none";*/
+  /*content: none;*/
   height: 33px;
   width: 3px;
   background-color: #fff;
 }
 
-.close:before {
+.close::before {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.close:after {
+.close::after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
@@ -591,7 +592,7 @@ input[data-error]::after {
 .boxLikes-bar {
   position: fixed;
   bottom: 0;
-  right: 50px;
+  right: 100px;
   background: #DB8876;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -634,7 +635,7 @@ input[data-error]::after {
   position: absolute;
   top: 480px;
   margin-left: 100px;
-  width: 100%;
+  /*width: 100%;*/
   height: 45px;
   opacity: 1;
   /*margin-bottom: 35px;*/
@@ -767,15 +768,16 @@ input[data-error]::after {
           justify-content: center;
   width: 100%;
   height: 135px;
-  padding: 0px 5px 10px 5px;
+  /*padding: 0px 5px 10px 5px;*/
   border-radius: 5px;
   background-color: #901C1C;
   /*box-shadow: 1px 3px 8px 0px rgba(0,0,0,0.2);*/
 }
 
 .widget-listbox_option {
-  /*z-index: 4;*/
+  z-index: 4;
   position: relative;
+  border-radius: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -785,7 +787,7 @@ input[data-error]::after {
   width: 100%;
   height: 100%;
   font-size: 20px;
-  padding-left: 10px;
+  padding-left: 15px;
   border-bottom: 1px solid white;
   -webkit-transition: all .3s linear;
   transition: all .3s linear;
@@ -950,8 +952,8 @@ header h1 {
       -ms-flex-pack: justify;
           justify-content: space-between;
   /*gap: 70px;*/
-  margin: 50px 100px 50px 100px;
-  width: 100%;
+  margin: 50px 100px 20px 100px;
+  /*width: 100%;*/
 }
 
 #photographerHeader {
@@ -995,7 +997,7 @@ header h1 {
 
 #mediaCards {
   margin: 0 100px 0 100px;
-  width: 100%;
+  /*width: 100%;*/
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
@@ -1004,16 +1006,23 @@ header h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  justify-items: center;
+  /*justify-items: center;*/
 }
 
 .mediaCard {
-  margin: 35px 35px 35px 0;
+  /*margin: 35px 35px 35px 0;*/
+  padding-right: 0%;
+}
+
+.mediaCard .mediaCard__video {
+  width: 270px;
 }
 
 .mediaCard .mediaCard__image-Photo, .mediaCard .mediaCard__video-video {
-  height: 230px;
-  width: 230px;
+  height: 340px;
+  width: 100%;
+  min-width: 390px;
+  max-width: 392px;
   border-radius: 5px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -1021,7 +1030,7 @@ header h1 {
 }
 
 .mediaCard .mediaCard__info {
-  width: 230px;
+  width: 390px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1044,5 +1053,6 @@ header h1 {
           flex-direction: row;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
+  gap: 5px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -37,24 +37,26 @@ export let organizedMediasBySelection = async() => {
 
     element.addEventListener("click", (e) => {
       //console.log("click")
-      //console.log(e.target.id);
+      console.log(e.target.id);
       //console.log(e.target.innerHTML);
       if (e.target.id==="widget-popularity"){
         //console.log("click on popularity");
         selected.innerHTML=e.target.innerHTML;
 
-        allArticles.sort(function(a, b){
+        allArticles.sort(function(a,b){
         return  b.dataset.likes - a.dataset.likes;
   
         });
       }
   
       if (e.target.id==="widget-date"){
-        //console.log("click on date");
+        console.log("click on date");
         selected.innerHTML=e.target.innerHTML
-        allArticles.sort(function(a, b){
-        return  new Date(b.dataset.date) - new Date(a.dataset.date);
-  
+        allArticles.sort(function(a,b){
+          console.log(b.dataset.date);
+          console.log(a.dataset.date);
+        //return new Date(b.dataset.date) - new Date(a.dataset.date);
+        return b.dataset.date - a.dataset.date; 
         });
       }
   
@@ -62,7 +64,7 @@ export let organizedMediasBySelection = async() => {
       if (e.target.id==="widget-title"){
         //console.log("click title");
         selected.innerHTML=e.target.innerHTML
-        allArticles.sort(function(a, b){
+        allArticles.sort(function(a,b){
         return  a.dataset.title.localeCompare(b.dataset.title);
   
         });

@@ -12,8 +12,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     /*gap: 70px;*/
-    margin: 50px 100px 50px 100px;
-    width: 100%;
+    margin: 50px 100px 20px 100px;
+    /*width: 100%;*/
    
 
 }
@@ -48,28 +48,35 @@
 
 #mediaCards{
     margin: 0 100px 0 100px;
-    width: 100%;
+    /*width: 100%;*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     align-items: center;
-    justify-items: center;
+    /*justify-items: center;*/
 }
 
 .mediaCard{
 
-    margin: 35px 35px 35px 0;
+    /*margin: 35px 35px 35px 0;*/
+    padding-right: 0%;
+
+    .mediaCard__video{
+        width: 270px;
+    }
 
     .mediaCard__image-Photo, .mediaCard__video-video{
-        height: 230px;
-        width: 230px;
+        height: 340px;
+        width: 100%;
+        min-width: 390px;
+        max-width: 392px;
         border-radius: 5px;
         object-fit: cover;
         padding-bottom: 5px; 
     }
 
     .mediaCard__info{
-        width: 230px;
+        width: 390px;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -84,6 +91,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+        gap: 5px;
     }
 
 }
